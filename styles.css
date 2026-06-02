@@ -1,0 +1,289 @@
+/* ============================================================
+   KERBECK — styles.css
+   Dark-luxury split-screen portal. Above the fold (100vh).
+   ============================================================ */
+
+:root {
+    --ink:   #0A0A0A;   /* background        */
+    --bone:  #F5F2EC;   /* warm white text   */
+    --muted: #9A938A;   /* secondary text    */
+    --gold:  #C9A24B;   /* restrained accent */
+
+    --header-h: 88px;
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; }
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;                 /* above the fold — no scroll on desktop */
+    display: flex;
+    flex-direction: column;           /* header band on top, split below */
+    background: var(--ink);
+    color: var(--bone);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ============================================================
+   HEADER — its own band on top of the split
+   ============================================================ */
+header {
+    flex: 0 0 var(--header-h);        /* fixed-height band, never shrinks */
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(1.5rem, 3vw, 3rem);
+    background: var(--ink);
+    border-bottom: 1px solid rgba(245, 242, 236, 0.08);
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(1.25rem, 1.6vw, 1.6rem);
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--bone);
+}
+
+.burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.burger span {
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--bone);
+    transition: background 0.4s var(--ease);
+}
+
+.burger:hover span { background: var(--gold); }
+
+/* ============================================================
+   MAIN — split-screen
+   ============================================================ */
+main {
+    display: flex;
+    flex: 1 1 auto;                   /* fills the rest: 100vh − header */
+    min-height: 0;
+    width: 100%;
+}
+
+/* ---------- LEFT: three stacked blocks ---------- */
+.portal-left {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.portal-block {
+    position: relative;
+    flex: 1 1 0;                      /* equal height thirds */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: clamp(1rem, 3vh, 2rem) clamp(2rem, 4vw, 3.5rem);
+    overflow: hidden;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(245, 242, 236, 0.06);
+}
+.portal-block:last-child { border-bottom: none; }
+
+/* Muted photo placeholder (radial-gradient until real images) */
+.portal-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.30;
+    transform: scale(1);
+    transition: opacity 0.6s var(--ease), transform 0.7s var(--ease);
+    z-index: 0;
+}
+
+/* Dark overlay above the photo for text legibility */
+.portal-block::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+        rgba(10, 10, 10, 0.82) 0%,
+        rgba(10, 10, 10, 0.55) 100%);
+    z-index: 1;
+    transition: background 0.6s var(--ease);
+}
+
+/* Different placeholder per block */
+.portal-block[data-target="premium"]::before {
+    background-image: radial-gradient(120% 90% at 25% 30%, #3a342b 0%, #1a1813 45%, #0A0A0A 100%);
+}
+.portal-block[data-target="gmc"]::before {
+    background-image: radial-gradient(120% 90% at 70% 40%, #243038 0%, #14181c 45%, #0A0A0A 100%);
+}
+.portal-block[data-target="cadillac"]::before {
+    background-image: radial-gradient(120% 90% at 40% 70%, #2e2a33 0%, #181519 45%, #0A0A0A 100%);
+}
+
+/* Block content sits above the layers */
+.portal-block > * { position: relative; z-index: 2; }
+
+/* Block title */
+.portal-block h2 {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(1.5rem, 2.2vw, 2.3rem);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+
+/* Gold accent line under the title (appears/brightens on hover) */
+.portal-block h2::after {
+    content: '';
+    display: block;
+    width: 42px;
+    height: 1px;
+    margin-top: 0.7rem;
+    background: var(--gold);
+    opacity: 0.45;
+    transform-origin: left center;
+    transform: scaleX(0.6);
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+/* ---------- Hover: photo brightens + gold accent ---------- */
+.portal-block:hover::before {
+    opacity: 0.62;
+    transform: scale(1.05);
+}
+.portal-block:hover::after {
+    background: linear-gradient(90deg,
+        rgba(10, 10, 10, 0.74) 0%,
+        rgba(10, 10, 10, 0.42) 100%);
+}
+.portal-block:hover h2::after {
+    opacity: 1;
+    transform: scaleX(1.7);
+}
+
+/* ---------- Brand list (inside Premium) ---------- */
+/* Hidden by default — revealed only on hover/focus of the Premium block */
+.brand-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.2rem, 0.8vh, 0.5rem);
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: max-height 0.6s var(--ease),
+                opacity 0.5s var(--ease),
+                transform 0.5s var(--ease),
+                margin 0.6s var(--ease);
+}
+
+.portal-block[data-target="premium"]:hover .brand-list,
+.portal-block[data-target="premium"]:focus-within .brand-list {
+    max-height: 16rem;
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: clamp(0.7rem, 1.6vh, 1.4rem);
+    pointer-events: auto;
+}
+
+.brand-list a {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.85rem, 1.05vw, 1.05rem);
+    line-height: 1.25;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    transition: color 0.4s var(--ease), letter-spacing 0.4s var(--ease);
+}
+
+.brand-list a:hover,
+.brand-list a:focus-visible {
+    color: var(--bone);
+    letter-spacing: 0.12em;
+}
+
+/* ============================================================
+   RIGHT: preview area — 4 stacked background layers
+   ============================================================ */
+.portal-right {
+    position: relative;
+    width: 60%;
+    overflow: hidden;
+}
+
+.portal-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: scale(1.06);
+    transition: opacity 0.6s var(--ease), transform 0.8s var(--ease);
+    z-index: 0;
+}
+
+/* Active layer is visible (default shown initially via .is-active in HTML) */
+.portal-bg.is-active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 1;
+}
+
+/* Distinct placeholder per state */
+.portal-bg[data-bg="default"] {
+    background-image: radial-gradient(80% 80% at 50% 45%, #2a2620 0%, #14110d 50%, #0A0A0A 100%);
+}
+.portal-bg[data-bg="premium"] {
+    background-image: radial-gradient(85% 85% at 40% 40%, #4a4234 0%, #211d16 50%, #0A0A0A 100%);
+}
+.portal-bg[data-bg="gmc"] {
+    background-image: radial-gradient(85% 85% at 55% 45%, #2c3a44 0%, #161c21 50%, #0A0A0A 100%);
+}
+.portal-bg[data-bg="cadillac"] {
+    background-image: radial-gradient(85% 85% at 45% 55%, #383140 0%, #1c1820 50%, #0A0A0A 100%);
+}
+
+/* Subtle inner vignette to add depth on the right */
+.portal-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: radial-gradient(110% 110% at 50% 50%,
+        transparent 55%, rgba(10, 10, 10, 0.55) 100%);
+}

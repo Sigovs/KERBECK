@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -iA2 \"Commands:\")",
+      "Bash(claude auth *)",
+      "Bash(npm -v)",
+      "Bash(git ls-remote *)"
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KERBECK</title>
+
+    <!-- Google Fonts: Playfair Display (serif) + Inter (sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink:   '#0A0A0A',  // background
+                        bone:  '#F5F2EC',  // warm white text
+                        muted: '#9A938A',  // secondary text
+                        gold:  '#C9A24B'   // restrained accent
+                    },
+                    fontFamily: {
+                        display: ['"Playfair Display"', 'serif'],
+                        sans:    ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- ============ HEADER ============ -->
+    <header>
+        <a href="/" class="logo">KERBECK</a>
+        <button type="button" class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- ============ MAIN (split-screen) ============ -->
+    <main>
+
+        <!-- ---------- LEFT: three stacked blocks ---------- -->
+        <div class="portal-left">
+
+            <!-- Premium Vehicles -->
+            <section class="portal-block" data-target="premium">
+                <h2>Premium Vehicles</h2>
+                <ul class="brand-list">
+                    <li><a href="https://www.fckerbeckrollsroyce.com/" target="_blank" rel="noopener">Rolls-Royce</a></li>
+                    <li><a href="https://www.fckerbecklamborghini.com/" target="_blank" rel="noopener">Lamborghini</a></li>
+                    <li><a href="https://www.bentleypalmyra.com/" target="_blank" rel="noopener">Bentley</a></li>
+                    <li><a href="https://www.astonmartinphiladelphia.com/" target="_blank" rel="noopener">Aston Martin</a></li>
+                    <li><a href="https://www.fckerbeckmaserati.com/" target="_blank" rel="noopener">Maserati</a></li>
+                </ul>
+            </section>
+
+            <!-- Buick GMC -->
+            <section class="portal-block" data-target="gmc">
+                <a href="https://www.fckerbeckbuickgmc.com/" target="_blank" rel="noopener">
+                    <h2>Buick GMC</h2>
+                </a>
+            </section>
+
+            <!-- Pre-owned Cadillacs -->
+            <section class="portal-block" data-target="cadillac">
+                <a href="https://www.fckerbeckcadillacs.com/" target="_blank" rel="noopener">
+                    <h2>Pre-owned Cadillacs</h2>
+                </a>
+            </section>
+
+        </div>
+
+        <!-- ---------- RIGHT: preview area with 4 background layers ---------- -->
+        <div class="portal-right">
+            <div class="portal-bg is-active" data-bg="default"></div>
+            <div class="portal-bg" data-bg="premium"></div>
+            <div class="portal-bg" data-bg="gmc"></div>
+            <div class="portal-bg" data-bg="cadillac"></div>
+        </div>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
