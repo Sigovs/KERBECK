@@ -46,15 +46,15 @@
         <!-- ============ NAV ============ -->
         <header class="nav">
             <button type="button" class="nav__menu" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
-                <img class="nav__menu-icon" src="images/icon-menu.svg" alt="">
-                <span>Menu</span>
+                <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span class="nav__menu-label">Menu</span>
             </button>
 
             <a class="nav__logo" href="/" aria-label="KERBECK — home">
                 <img src="images/logo-kerbeck.svg" alt="KERBECK">
             </a>
 
-            <a class="nav__contact" href="#contact">Contact</a>
+            <a class="cta nav__contact" href="#contact"><span>Contact</span></a>
         </header>
 
         <!-- ============ BOTTOM DOCK — collapsible hover sections ============ -->
@@ -67,32 +67,31 @@
                     <ul class="brands">
                         <li>
                             <a href="https://www.fckerbecklamborghini.com/" target="_blank" rel="noopener" aria-label="Lamborghini">
-                                <img src="images/brand-lamborghini.svg" alt="Lamborghini">
+                                <img src="images/lambo_logo.svg" alt="Lamborghini">
                             </a>
                         </li>
                         <li>
                             <a href="https://www.fckerbeckrollsroyce.com/" target="_blank" rel="noopener" aria-label="Rolls-Royce">
-                                <img src="images/brand-rolls-royce.svg" alt="Rolls-Royce">
+                                <img src="images/rr_logo.svg" alt="Rolls-Royce">
                             </a>
                         </li>
                         <li>
                             <a href="https://www.astonmartinphiladelphia.com/" target="_blank" rel="noopener" aria-label="Aston Martin">
-                                <img src="images/brand-aston-martin.svg" alt="Aston Martin">
+                                <img src="images/aston_logo.svg" alt="Aston Martin">
                             </a>
                         </li>
                         <li>
                             <a href="https://www.fckerbeckmaserati.com/" target="_blank" rel="noopener" aria-label="Maserati">
-                                <img src="images/brand-maserati.svg" alt="Maserati">
+                                <img src="images/maserati_logo.svg" alt="Maserati">
                             </a>
                         </li>
                         <li>
-                            <a class="brands__bentley" href="https://www.bentleypalmyra.com/" target="_blank" rel="noopener" aria-label="Bentley">
-                                <img src="images/brand-bentley-wings.svg" alt="">
-                                <img src="images/brand-bentley-word.svg" alt="Bentley">
+                            <a href="https://www.bentleypalmyra.com/" target="_blank" rel="noopener" aria-label="Bentley">
+                                <img src="images/bentley_logo.svg" alt="Bentley">
                             </a>
                         </li>
                     </ul>
-                    <a class="btn-red sect__all" href="https://www.kerbeckcars.com/" target="_blank" rel="noopener">View All</a>
+                    <a class="cta sect__all" href="https://www.kerbeckcars.com/" target="_blank" rel="noopener"><span>View All</span></a>
                 </div>
             </div>
 
@@ -103,16 +102,21 @@
                     <ul class="brands">
                         <li>
                             <a href="https://www.fckerbeckbuickgmc.com/" target="_blank" rel="noopener" aria-label="Buick">
-                                <span class="wordmark">Buick</span>
+                                <img src="images/buick_logo.svg" alt="Buick">
                             </a>
                         </li>
                         <li>
                             <a href="https://www.fckerbeckbuickgmc.com/" target="_blank" rel="noopener" aria-label="GMC">
-                                <span class="wordmark">GMC</span>
+                                <img src="images/gmc_logo.svg" alt="GMC">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.fckerbeckbuickgmc.com/" target="_blank" rel="noopener" aria-label="Hummer">
+                                <img src="images/hummer_logo.svg" alt="Hummer">
                             </a>
                         </li>
                     </ul>
-                    <a class="btn-red sect__all" href="https://www.fckerbeckbuickgmc.com/" target="_blank" rel="noopener">View All</a>
+                    <a class="cta sect__all" href="https://www.fckerbeckbuickgmc.com/" target="_blank" rel="noopener"><span>View All</span></a>
                 </div>
             </div>
 
@@ -123,17 +127,39 @@
                     <ul class="brands">
                         <li>
                             <a href="https://www.fckerbeckcadillacs.com/" target="_blank" rel="noopener" aria-label="Cadillac">
-                                <img src="images/brand-cadillac.svg" alt="Cadillac">
+                                <img src="images/cadillac_logo.svg" alt="Cadillac">
                             </a>
                         </li>
                     </ul>
-                    <a class="btn-red sect__all" href="https://www.fckerbeckcadillacs.com/" target="_blank" rel="noopener">View All</a>
+                    <a class="cta sect__all" href="https://www.fckerbeckcadillacs.com/" target="_blank" rel="noopener"><span>View All</span></a>
                 </div>
             </div>
 
         </section>
 
     </main>
+
+    <!-- ============ FULLSCREEN MENU OVERLAY ============ -->
+    <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Main menu" aria-hidden="true">
+        <div class="menu__panel">
+            <!-- Background image (changes on hover) -->
+            <div class="menu__bg" id="menu-bg-1"></div>
+            <div class="menu__bg" id="menu-bg-2"></div>
+
+            <nav class="menu__nav" aria-label="Primary">
+                <ul class="menu__list">
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/home.jpg"><span class="menu__text"><span class="menu__text-a">Home</span><span class="menu__text-b" aria-hidden="true">Home</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/new-inventory.jpg"><span class="menu__text"><span class="menu__text-a">New Inventory</span><span class="menu__text-b" aria-hidden="true">New Inventory</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/pre-owned.jpg"><span class="menu__text"><span class="menu__text-a">Pre-Owned</span><span class="menu__text-b" aria-hidden="true">Pre-Owned</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/finance.jpg"><span class="menu__text"><span class="menu__text-a">Finance</span><span class="menu__text-b" aria-hidden="true">Finance</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/get-prequalified.jpg"><span class="menu__text"><span class="menu__text-a">Get Pre-qualified</span><span class="menu__text-b" aria-hidden="true">Get Pre-qualified</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/service-parts.jpg"><span class="menu__text"><span class="menu__text-a">Service &amp; Parts</span><span class="menu__text-b" aria-hidden="true">Service &amp; Parts</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/about.jpg"><span class="menu__text"><span class="menu__text-a">About</span><span class="menu__text-b" aria-hidden="true">About</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#contact" data-img="images/menu/contact.jpg"><span class="menu__text"><span class="menu__text-a">Contact</span><span class="menu__text-b" aria-hidden="true">Contact</span></span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
