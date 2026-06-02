@@ -133,7 +133,12 @@
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1000 --screenshot=/tmp/grain.png file://__TRACKED_VAR__/index.html)",
       "Bash(sips -c 280 280 /tmp/grain.png --out /tmp/grain_z.png)",
       "Bash(sips -Z 560 /tmp/grain_z.png --out /tmp/grain_z.png)",
-      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'Video grain overlay, flat scrim & secondary Contact *)"
+      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'Video grain overlay, flat scrim & secondary Contact *)",
+      "Bash(perl -pi -e \"s/'Saira Condensed'/'Roboto Condensed'/g\" styles.css)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/roboto.png file://__TRACKED_VAR__/index.html)",
+      "Bash(perl -pi -e 's/letter-spacing:\\\\s*[^;]+;/letter-spacing: 0;/g' styles.css)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/nospacing.png file://__TRACKED_VAR__/index.html)",
+      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'Switch display font to Roboto Condensed, remove letter-spacing *)"
     ],
     "additionalDirectories": [
       "/private/tmp"

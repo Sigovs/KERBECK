@@ -96,10 +96,10 @@ img { display: block; max-width: 100%; }
     border: none;
     cursor: pointer;
     color: var(--bone);
-    font-family: 'Saira Condensed', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     font-size: 14px;
     font-weight: 500;
-    letter-spacing: 0.18em;
+    letter-spacing: 0;
     text-transform: uppercase;
     transition: opacity 0.35s var(--ease);
 }
@@ -239,11 +239,11 @@ img { display: block; max-width: 100%; }
 }
 .hero__slogan-title {
     margin: 0;
-    font-family: 'Saira Condensed', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     font-weight: 600;
     font-size: clamp(1.7rem, 3vw, 3.2rem);
     line-height: 1.06;
-    letter-spacing: 0.02em;
+    letter-spacing: 0;
     text-transform: uppercase;
     color: var(--bone);
     text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
@@ -254,7 +254,7 @@ img { display: block; max-width: 100%; }
     font-family: 'Inter', system-ui, sans-serif;
     font-weight: 300;
     font-size: clamp(0.85rem, 0.95vw, 1.05rem);
-    letter-spacing: 0.04em;
+    letter-spacing: 0;
     color: var(--muted);
     text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
 }
@@ -323,11 +323,11 @@ img { display: block; max-width: 100%; }
 .sect__label {
     flex: 0 0 auto;
     white-space: nowrap;
-    font-family: 'Saira Condensed', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     font-size: clamp(13px, 0.85vw, 16px);
     font-weight: 500;
     line-height: 1.05;
-    letter-spacing: 0.08em;
+    letter-spacing: 0;
     text-transform: uppercase;
     color: #fff;
 }
@@ -388,10 +388,10 @@ img { display: block; max-width: 100%; }
 
 /* Text wordmark logos (Buick / GMC — no SVG available yet) */
 .wordmark {
-    font-family: 'Saira Condensed', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     font-size: clamp(30px, 2.4vw, 44px);
     font-weight: 600;
-    letter-spacing: 0.14em;
+    letter-spacing: 0;
     text-transform: uppercase;
     color: #fff;
     white-space: nowrap;
@@ -408,9 +408,9 @@ img { display: block; max-width: 100%; }
     border-radius: 4px;
     background: transparent;
     color: var(--cta);
-    font-family: 'Saira Condensed', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0;
     text-transform: uppercase;
     cursor: pointer;
     transition: border-color 0.3s var(--ease);
@@ -586,11 +586,11 @@ body.menu-open .nav__actions { opacity: 0; pointer-events: none; }
 .menu__link {
     display: inline-block;
     padding: clamp(0.2rem, 0.6vh, 0.5rem) 0;
-    font-family: 'Saira Condensed', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     font-weight: 500;
     font-size: clamp(1.7rem, 3vw, 2.6rem);
     line-height: 1.05;
-    letter-spacing: 0.02em;
+    letter-spacing: 0;
     text-transform: uppercase;
     color: #fff;
     opacity: 0.5;
