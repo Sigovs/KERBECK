@@ -54,8 +54,58 @@
                 <img src="images/logo-kerbeck.svg" alt="KERBECK">
             </a>
 
-            <a class="cta nav__contact" href="#contact"><span>Contact</span></a>
+            <div class="nav__actions">
+                <a class="nav__icon" href="tel:+18567863030" aria-label="Call us">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                </a>
+                <a class="nav__icon" href="https://maps.google.com/?q=FC+Kerbeck+Palmyra+NJ" target="_blank" rel="noopener" aria-label="Location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </a>
+                <a class="cta nav__contact" href="#contact"><span>Contact</span></a>
+            </div>
         </header>
+
+        <!-- ============ SLOGAN (scroll-cycled slides) ============ -->
+        <div class="hero__slogan" id="slogan">
+            <div class="hero__slide is-active">
+                <h1 class="hero__slogan-title">
+                    <span>Over A Century of</span>
+                    <span>Exceptional Automobiles</span>
+                </h1>
+                <p class="hero__slogan-sub">From luxury icons to everyday excellence.</p>
+                <a class="cta hero__btn" href="#"><span>Browse Inventory</span></a>
+            </div>
+
+            <div class="hero__slide">
+                <h1 class="hero__slogan-title">
+                    <span>Drive Home</span>
+                    <span>With Confidence</span>
+                </h1>
+                <p class="hero__slogan-sub">Simple, flexible financing.</p>
+                <a class="cta hero__btn" href="#"><span>Get Pre-Approved</span></a>
+            </div>
+
+            <div class="hero__slide">
+                <h1 class="hero__slogan-title">
+                    <span>Expert Care For</span>
+                    <span>Every Mile Ahead</span>
+                </h1>
+                <p class="hero__slogan-sub">Service you can trust.</p>
+                <a class="cta hero__btn" href="#"><span>Schedule Service</span></a>
+            </div>
+        </div>
+
+        <!-- Slide indicator dots -->
+        <div class="hero__dots" id="slogan-dots" role="tablist" aria-label="Highlights">
+            <button type="button" class="hero__dot is-active" aria-label="Slide 1"></button>
+            <button type="button" class="hero__dot" aria-label="Slide 2"></button>
+            <button type="button" class="hero__dot" aria-label="Slide 3"></button>
+        </div>
 
         <!-- ============ BOTTOM DOCK — collapsible hover sections ============ -->
         <section class="dock" aria-label="Our brands">
@@ -122,7 +172,7 @@
 
             <!-- Preowned Cadillac -->
             <div class="sect" data-sect="cadillac">
-                <span class="sect__label">Preowned Cadillac</span>
+                <span class="sect__label">Pre-Owned Cadillac</span>
                 <div class="sect__content">
                     <ul class="brands">
                         <li>
@@ -148,14 +198,14 @@
 
             <nav class="menu__nav" aria-label="Primary">
                 <ul class="menu__list">
-                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/home.jpg"><span class="menu__text"><span class="menu__text-a">Home</span><span class="menu__text-b" aria-hidden="true">Home</span></span></a></li>
-                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/new-inventory.jpg"><span class="menu__text"><span class="menu__text-a">New Inventory</span><span class="menu__text-b" aria-hidden="true">New Inventory</span></span></a></li>
-                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/pre-owned.jpg"><span class="menu__text"><span class="menu__text-a">Pre-Owned</span><span class="menu__text-b" aria-hidden="true">Pre-Owned</span></span></a></li>
-                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/finance.jpg"><span class="menu__text"><span class="menu__text-a">Finance</span><span class="menu__text-b" aria-hidden="true">Finance</span></span></a></li>
-                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/get-prequalified.jpg"><span class="menu__text"><span class="menu__text-a">Get Pre-qualified</span><span class="menu__text-b" aria-hidden="true">Get Pre-qualified</span></span></a></li>
-                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/service-parts.jpg"><span class="menu__text"><span class="menu__text-a">Service &amp; Parts</span><span class="menu__text-b" aria-hidden="true">Service &amp; Parts</span></span></a></li>
-                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/about.jpg"><span class="menu__text"><span class="menu__text-a">About</span><span class="menu__text-b" aria-hidden="true">About</span></span></a></li>
-                    <li class="menu__item"><a class="menu__link" href="#contact" data-img="images/menu/contact.jpg"><span class="menu__text"><span class="menu__text-a">Contact</span><span class="menu__text-b" aria-hidden="true">Contact</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_Home.jpg"><span class="menu__text"><span class="menu__text-a">Home</span><span class="menu__text-b" aria-hidden="true">Home</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_newinventory.png"><span class="menu__text"><span class="menu__text-a">New Inventory</span><span class="menu__text-b" aria-hidden="true">New Inventory</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_preowned.jpg"><span class="menu__text"><span class="menu__text-a">Pre-Owned</span><span class="menu__text-b" aria-hidden="true">Pre-Owned</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_finance.jpg"><span class="menu__text"><span class="menu__text-a">Finance</span><span class="menu__text-b" aria-hidden="true">Finance</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_getpequalified.jpg"><span class="menu__text"><span class="menu__text-a">Get Pre-qualified</span><span class="menu__text-b" aria-hidden="true">Get Pre-qualified</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_service.jpg"><span class="menu__text"><span class="menu__text-a">Service &amp; Parts</span><span class="menu__text-b" aria-hidden="true">Service &amp; Parts</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_about.jpg"><span class="menu__text"><span class="menu__text-a">About</span><span class="menu__text-b" aria-hidden="true">About</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#contact" data-img="images/menu/nav_contact.jpg"><span class="menu__text"><span class="menu__text-a">Contact</span><span class="menu__text-b" aria-hidden="true">Contact</span></span></a></li>
                 </ul>
             </nav>
         </div>

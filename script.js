@@ -1,5 +1,63 @@
 // KERBECK — script.js
 
+/* Hero slogan: cycle through slides on mouse-wheel scroll (page stays fixed). */
+(function () {
+    const slogan = document.getElementById('slogan');
+    const dotsWrap = document.getElementById('slogan-dots');
+    if (!slogan) return;
+
+    const slides = Array.from(slogan.querySelectorAll('.hero__slide'));
+    const dots = dotsWrap ? Array.from(dotsWrap.querySelectorAll('.hero__dot')) : [];
+    let index = 0;
+    let locked = false;
+
+    const show = (i) => {
+        index = (i + slides.length) % slides.length;   // wrap around
+        slides.forEach((s, n) => s.classList.toggle('is-active', n === index));
+        dots.forEach((d, n) => d.classList.toggle('is-active', n === index));
+    };
+
+    // Auto-cycle through the slides by itself
+    let timer = null;
+    const AUTO_MS = 5000;
+    const startAuto = () => {
+        stopAuto();
+        timer = setInterval(() => {
+            if (document.body.classList.contains('menu-open')) return;
+            show(index + 1);
+        }, AUTO_MS);
+    };
+    const stopAuto = () => { if (timer) clearInterval(timer); timer = null; };
+    const restartAuto = () => { startAuto(); };
+
+    const onWheel = (e) => {
+        // Ignore while the fullscreen menu is open
+        if (document.body.classList.contains('menu-open')) return;
+        e.preventDefault();
+        if (locked) return;
+        if (Math.abs(e.deltaY) < 8) return;
+        const next = index + (e.deltaY > 0 ? 1 : -1);
+        if (next === index || next < 0 || next > slides.length - 1) return;
+        locked = true;
+        show(next);
+        restartAuto();
+        setTimeout(() => { locked = false; }, 750);
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+
+    dots.forEach((d, n) => d.addEventListener('click', () => { show(n); restartAuto(); }));
+
+    // Keyboard up/down arrows
+    document.addEventListener('keydown', (e) => {
+        if (document.body.classList.contains('menu-open')) return;
+        if (e.key === 'ArrowDown') { e.preventDefault(); show(index + 1); restartAuto(); }
+        if (e.key === 'ArrowUp')   { e.preventDefault(); show(index - 1); restartAuto(); }
+    });
+
+    startAuto();
+})();
+
 /* Bottom dock: exactly ONE section open at a time.
    Hover (mouse) or focus (keyboard) opens a section and closes the rest. */
 (function () {
@@ -14,13 +72,21 @@
     const closeAll = () =>
         sections.forEach((s) => s.classList.remove('is-open'));
 
+    let hoverTimer = null;
+    const OPEN_DELAY = 180;   // ms — slight hover-intent delay before opening
+
     sections.forEach((s) => {
-        s.addEventListener('mouseenter', () => openOnly(s));
-        s.addEventListener('focusin', () => openOnly(s));
+        s.addEventListener('mouseenter', () => {
+            clearTimeout(hoverTimer);
+            hoverTimer = setTimeout(() => openOnly(s), OPEN_DELAY);
+        });
+        s.addEventListener('mouseleave', () => clearTimeout(hoverTimer));
+        s.addEventListener('focusin', () => { clearTimeout(hoverTimer); openOnly(s); });
     });
 
     // Close when the pointer leaves the whole dock (unless focus is still inside)
     dock.addEventListener('mouseleave', () => {
+        clearTimeout(hoverTimer);
         if (!dock.contains(document.activeElement)) closeAll();
     });
 
