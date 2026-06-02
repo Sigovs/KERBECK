@@ -1,8 +1,7 @@
-# KERBECK — Portal Page (split-screen витрина)
+# KERBECK — Home Landing (full-bleed hero)
 
 ## ⚠️ ЧТО ЭТО ТАКОЕ
-
-Публичная Portal-страница для kerbeckcars.com. Чистый HTML/CSS/JS, БЕЗ сборщика,
+Публичная home-страница для kerbeckcars.com. Чистый HTML/CSS/JS, БЕЗ сборщика,
 БЕЗ npm, БЕЗ React. Tailwind ТОЛЬКО через CDN. Без бэкенда, без админки.
 
 Файлы: index.html + styles.css + script.js + папка images/. Больше ничего.
@@ -10,89 +9,75 @@
 
 FC Kerbeck — люксовый авто-дилер (Палмира, NJ, с 1899).
 
-## LAYOUT (split-screen)
+Дизайн взят из Figma-прототипа:
+https://www.figma.com/proto/D8aMizBomd2ZtTILaSDZ2M/FC-KERBECK?node-id=15-948
+(fileKey D8aMizBomd2ZtTILaSDZ2M, node 15:948 «index 2 hero»).
 
-### Desktop
-Экран делится на две части по вертикали:
-- ЛЕВО (~40%): три блока ДРУГ НАД ДРУГОМ (горизонтальные полосы):
-  1. Premium Vehicles
-  2. Buick GMC
-  3. Pre-owned Cadillacs
-  Каждый блок: приглушённое фоновое фото + текст (название серифом) поверх.
-- ПРАВО (~60%): большая область с фоновым ИЗОБРАЖЕНИЕМ.
+## LAYOUT (full-bleed hero, above the fold)
+Весь экран = одно фоновое ВИДЕО на 100vh (Rolls-Royce в ночном городе),
+поверх него прозрачные элементы. Высота от 100vh, без скролла на desktop.
 
-Хедер сверху: логотип KERBECK слева + бургер-меню справа.
+### Nav (сверху, ~100px, прозрачный поверх видео)
+- ЛЕВО: иконка-меню (images/icon-menu.svg) + «Menu».
+- ЦЕНТР: логотип KERBECK (images/logo-kerbeck.svg, белый).
+- ПРАВО: красная кнопка «Contact» (rounded).
 
-### СОСТОЯНИЯ ПРАВОЙ ЧАСТИ — всего 4 изображения
-- ДЕФОЛТ (мышь никуда не наведена): справа показывается ДЕФОЛТНОЕ фото
-  (общее имиджевое — салон/люкс-авто). Это исходное состояние лендинга.
-- Hover на блок → справа фото этого блока (плавная анимация, fade + лёгкий zoom).
-- Мышь УШЛА с блоков → справа ВОЗВРАЩАЕТСЯ дефолтное фото.
-Итого 4 фона: default + premium + gmc + cadillac.
+### Bottom dock (нижняя панель, frosted glass, backdrop-blur, rounded)
+Горизонтальный ряд из трёх частей:
+1. Premium bar (растягивается): лейбл «Our Premium Brands» + внутренняя тёмная
+   плашка с 5 логотипами марок (ссылки) + красная кнопка «View All».
+   Порядок логотипов: Lamborghini, Rolls-Royce, Aston Martin, Maserati, Bentley.
+2. Плитка «Buick GMC» (ссылка, вся кликабельна).
+3. Плитка «Preowned Cadillac» (ссылка, вся кликабельна).
 
-### Поведение (Desktop)
-- Hover «Premium Vehicles» → справа фон premium + СПИСОК 5 марок (каждая ссылка):
-    Rolls-Royce  → https://www.fckerbeckrollsroyce.com/
-    Lamborghini  → https://www.fckerbecklamborghini.com/
-    Bentley      → https://www.bentleypalmyra.com/
-    Aston Martin → https://www.astonmartinphiladelphia.com/
-    Maserati     → https://www.fckerbeckmaserati.com/
-- Hover «Buick GMC» → справа фон gmc; клик по блоку → https://www.fckerbeckbuickgmc.com/
-- Hover «Pre-owned Cadillacs» → справа фон cadillac; клик → https://www.fckerbeckcadillacs.com/
-- Фото в полосе слева = то же фото, что показывается справа в полном размере.
+## ССЫЛКИ (бренды)
+- Rolls-Royce  → https://www.fckerbeckrollsroyce.com/
+- Lamborghini  → https://www.fckerbecklamborghini.com/
+- Bentley      → https://www.bentleypalmyra.com/
+- Aston Martin → https://www.astonmartinphiladelphia.com/
+- Maserati     → https://www.fckerbeckmaserati.com/
+- Buick GMC    → https://www.fckerbeckbuickgmc.com/
+- Cadillac     → https://www.fckerbeckcadillacs.com/
 
-### Mobile
-- ТОЛЬКО левая колонка: три блока друг под другом (приглушённое фото + текст).
-- Правой части НЕТ (дефолтное фото и hover-превью не показываются).
-- Premium Vehicles раскрывает список 5 марок по ТАПУ (toggle, простой JS).
-- Buick GMC / Cadillac — вся плитка кликабельна (ссылка).
-
-## ⚠️ ABOVE THE FOLD
-На desktop весь экран (хедер + split-screen) помещается в один вьюпорт
-без скролла. Высоту считать от 100vh.
-
-## ⚠️ ДИЗАЙН — «тёмный люкс», НЕ generic
-НЕ использовать стандартный AI/Claude design base, НЕ дефолтные Tailwind-цвета
-напрямую. Уровень сайтов Rolls-Royce / Bentley: дорого, минималистично, воздух.
-
-Палитра (задать в tailwind.config внутри <head>):
-- bg: #0A0A0A (чёрный)
-- text: #F5F2EC (тёплый белый)
-- muted: #9A938A
-- gold: #C9A24B (акцент СДЕРЖАННО: линии, hover, мелкие подписи)
+## ДИЗАЙН — «тёмный люкс»
+Палитра (в tailwind.config внутри <head> + CSS-переменные):
+- ink:   #070A0B (фон)
+- panel: #091012 (плотные панели)
+- bone:  #EDEAE4 (тёплый белый текст)
+- red:   #E10600 (акцент: кнопки Contact / View All)
+- glass: rgba(217,217,217,0.12), inner rgba(0,0,0,0.26), hairline rgba(255,255,255,0.10)
 
 Типографика (Google Fonts):
-- Заголовки / названия блоков / марки: Playfair Display (serif)
-- Подписи / интерфейс: Inter (sans), uppercase + широкий letter-spacing для лейблов
+- Дисплей/лейблы/интерфейс: Saira Condensed (замена лицензионного «Lambotype Cnd»
+  из макета — он недоступен в вебе), uppercase + letter-spacing.
+- Текст/подписи: Inter.
 
-Анимации: плавные, неспешные (0.4–0.8s, ease). Смена фото справа — fade + лёгкий
-zoom. Hover на блок слева — фото проявляется ярче, золотая линия/акцент.
+Анимации: плавные (0.3–0.6s, ease). Hover: лёгкий подъём/яркость кнопок,
+проявление логотипов и плиток.
 
-## ФОТО (4 плейсхолдера)
-Пока реальных фото нет → тёмные плейсхолдеры (radial-gradient, имитирующий
-подсветку), РАЗНЫЕ для каждого состояния:
-- images/default.jpg  (дефолтное имиджевое)
-- images/premium.jpg
-- images/gmc.jpg
-- images/cadillac.jpg
-Код должен работать сразу с плейсхолдерами; позже заменим на реальные фото в images/.
+## ASSETS (images/)
+- hero.mp4            — фоновое видео (autoplay, muted, loop, playsinline)
+- hero-poster.jpg     — постер-фоллбэк до загрузки видео
+- logo-kerbeck.svg    — логотип в навбаре (белый)
+- icon-menu.svg       — иконка меню
+- brand-*.svg         — 5 логотипов марок (white fill через var(--fill-0, white))
+ВАЖНО про SVG: у них должны быть РЕАЛЬНЫЕ width/height (из viewBox), а не "100%",
+иначе в <img> ломается размер и логотипы раздуваются.
 
 ## Структура файлов
 - index.html  — разметка + Tailwind CDN + tailwind.config + шрифты + подключение styles.css, script.js
-- styles.css  — кастомные стили (анимации, фоны блоков, переходы)
-- script.js   — логика: дефолтное фото, hover-смена справа (desktop),
-                возврат к дефолту, tap-раскрытие Premium (mobile)
-- images/     — 4 фото (плейсхолдеры пока)
+- styles.css  — кастомные стили (hero, nav, dock, стекло, кнопки, адаптив)
+- script.js   — логика (меню-тоггл и пр.)
+- images/     — видео, постер, логотипы
 
 ## Правила
 - Семантичный HTML, доступность (aria, alt, контраст, клавиатура)
-- Mobile-first, адаптивность через брейкпоинты Tailwind
-- Цвета через токены tailwind.config, без хардкод-hex где возможно
-- Данные марок (название + ссылка) и пути к фото — в одном месте в script.js (массивы)
+- Адаптивность через брейкпоинты; на узких экранах dock складывается в колонку
+- Цвета через токены, без хардкод-hex где возможно
 
-## Рабочий процесс (по частям, с проверкой)
-1. Разметка: хедер + split (лево: 3 блока; право: слой дефолт + 3 слоя hover) — БЕЗ стилей
-2. Стили: «тёмный люкс», раскладка split-screen, above the fold
-3. JS: дефолтное фото + hover-смена + возврат к дефолту + список марок Premium
-4. Mobile: правая часть скрыта, Premium раскрывается по тапу
-5. Замена 4 плейсхолдеров на реальные фото
+## Проверка рендера
+Локально headless-скриншот:
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+    --headless --disable-gpu --window-size=1920,1080 \
+    --screenshot=/tmp/out.png "file://$PWD/index.html"
+(в headless видео не играет — виден постер.)
