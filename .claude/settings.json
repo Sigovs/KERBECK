@@ -114,7 +114,26 @@
       "Bash(perl -0pe 's{<div class=\"hero__slide is-active\">}{<div class=\"hero__slide\">}; s{<div class=\"hero__slide\">\\(\\\\s*<h1 class=\"hero__slogan-title\">\\\\s*<span>Drive Home\\)}{<div class=\"hero__slide is-active\">$1}s' index.html)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --screenshot=/tmp/sl2.png file://__TRACKED_VAR__/_s2.html)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --screenshot=/tmp/herobtn.png file://__TRACKED_VAR__/index.html)",
-      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/anim.png file://__TRACKED_VAR__/index.html)"
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/anim.png file://__TRACKED_VAR__/index.html)",
+      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'Hero slogan slides, nav icons & menu images *)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1200 --screenshot=/tmp/secondary.png file://__TRACKED_VAR__/index.html)",
+      "Bash(sips -c 120 520 --cropOffset 0 1400 /tmp/secondary.png --out /tmp/sec_tr.png)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1200 --screenshot=/tmp/noise.png file://__TRACKED_VAR__/index.html)",
+      "Bash(sips -c 300 300 /tmp/noise.png --out /tmp/noise_z.png)",
+      "Bash(sips -Z 600 /tmp/noise_z.png --out /tmp/noise_z.png)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1200 --screenshot=/tmp/darker.png file://__TRACKED_VAR__/index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1200 --screenshot=/tmp/flat50.png file://__TRACKED_VAR__/index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1200 --screenshot=/tmp/noise30.png file://__TRACKED_VAR__/index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1000 --screenshot=/tmp/contact_grey.png file://__TRACKED_VAR__/index.html)",
+      "Bash(sips -c 120 520 --cropOffset 0 1400 /tmp/contact_grey.png --out /tmp/cg_tr.png)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1000 --screenshot=/tmp/cg2.png file://__TRACKED_VAR__/index.html)",
+      "Bash(sips -c 120 520 --cropOffset 0 1400 /tmp/cg2.png --out /tmp/cg2_tr.png)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1000 --screenshot=/tmp/noise50.png file://__TRACKED_VAR__/index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1000 --screenshot=/tmp/noise_v.png file://__TRACKED_VAR__/index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1000 --screenshot=/tmp/grain.png file://__TRACKED_VAR__/index.html)",
+      "Bash(sips -c 280 280 /tmp/grain.png --out /tmp/grain_z.png)",
+      "Bash(sips -Z 560 /tmp/grain_z.png --out /tmp/grain_z.png)",
+      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'Video grain overlay, flat scrim & secondary Contact *)"
     ],
     "additionalDirectories": [
       "/private/tmp"

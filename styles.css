@@ -57,13 +57,20 @@ img { display: block; max-width: 100%; }
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background:
-        linear-gradient(to bottom,
-            rgba(7, 10, 11, 0.55) 0%,
-            rgba(7, 10, 11, 0.05) 22%,
-            rgba(7, 10, 11, 0.00) 45%,
-            rgba(7, 10, 11, 0.45) 80%,
-            rgba(7, 10, 11, 0.70) 100%);
+    background: rgba(7, 10, 11, 0.5);   /* solid 50% fill over the whole video */
+}
+
+/* Subtle film-grain noise over the video (sits above scrim, below UI) */
+.hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.6;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.6' intercept='-0.75'/%3E%3CfeFuncG type='linear' slope='2.6' intercept='-0.75'/%3E%3CfeFuncB type='linear' slope='2.6' intercept='-0.75'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 150px 150px;
 }
 
 /* ============================================================
@@ -150,7 +157,7 @@ img { display: block; max-width: 100%; }
 .nav__icon:hover,
 .nav__icon:focus-visible { color: var(--cta); transform: translateY(-1px); }
 
-/* Contact button (size only — visual comes from .cta) */
+/* Contact button — secondary, grey outline (#BCBCBC) */
 .nav__contact {
     min-width: 98px;
     height: 40px;
@@ -158,6 +165,11 @@ img { display: block; max-width: 100%; }
     border-radius: 5px;
     font-size: 16px;
 }
+/* Compound selector beats base .cta regardless of source order */
+.nav__contact.cta { border-color: #BCBCBC; }
+.nav__contact.cta > span,
+.nav__contact.cta:hover > span,
+.nav__contact.cta:focus-visible > span { color: #BCBCBC; }
 
 /* ============================================================
    SLOGAN — bottom-left of the hero
@@ -460,26 +472,20 @@ img { display: block; max-width: 100%; }
     line-height: 1.05;
 }
 .sect__all,
-.nav__contact,
 .hero__btn {
     background: var(--cta);
     border-color: var(--cta);
 }
 .sect__all > span,
-.nav__contact > span,
 .hero__btn > span { color: #fff; }
 
-/* Reverse CTAs: black #141414 fill rises, text stays white */
+/* Primary CTAs (View All, hero): black #141414 fill rises, text stays white */
 .sect__all::before,
 .sect__all::after,
-.nav__contact::before,
-.nav__contact::after,
 .hero__btn::before,
 .hero__btn::after { background: #141414; }
 .sect__all:hover > span,
 .sect__all:focus-visible > span,
-.nav__contact:hover > span,
-.nav__contact:focus-visible > span,
 .hero__btn:hover > span,
 .hero__btn:focus-visible > span { color: #fff; }
 
