@@ -189,6 +189,24 @@
 
     </main>
 
+    <!-- ============ INVENTORY (full-width carousel) ============ -->
+    <section class="inventory" id="inventory" aria-label="Featured inventory">
+        <header class="inventory__head">
+            <div class="inventory__heading">
+                <span class="inventory__eyebrow">The Collection</span>
+                <h1 class="inventory__title">Featured Inventory</h1>
+            </div>
+            <div class="inventory__nav">
+                <a class="inventory__all" href="#">View All&nbsp;&rarr;</a>
+                <button type="button" class="inv-arrow" data-dir="-1" aria-label="Previous">&#8249;</button>
+                <button type="button" class="inv-arrow" data-dir="1" aria-label="Next">&#8250;</button>
+            </div>
+        </header>
+
+        <!-- Cards rendered by script.js from the INVENTORY data (repeated for now) -->
+        <div class="inv-track" id="inv-track"></div>
+    </section>
+
     <!-- ============ FULLSCREEN MENU OVERLAY ============ -->
     <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Main menu" aria-hidden="true">
         <div class="menu__panel">

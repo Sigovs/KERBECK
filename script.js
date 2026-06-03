@@ -30,30 +30,34 @@
     const stopAuto = () => { if (timer) clearInterval(timer); timer = null; };
     const restartAuto = () => { startAuto(); };
 
-    const onWheel = (e) => {
-        // Ignore while the fullscreen menu is open
-        if (document.body.classList.contains('menu-open')) return;
-        e.preventDefault();
-        if (locked) return;
-        if (Math.abs(e.deltaY) < 8) return;
-        const next = index + (e.deltaY > 0 ? 1 : -1);
-        if (next === index || next < 0 || next > slides.length - 1) return;
-        locked = true;
-        show(next);
-        restartAuto();
-        setTimeout(() => { locked = false; }, 750);
-    };
+    // If the page has content below the hero (e.g. inventory), DON'T hijack the
+    // wheel — let it scroll the page normally; the slogan keeps auto-cycling.
+    const hasSectionsBelow = !!document.querySelector('.inventory');
 
-    window.addEventListener('wheel', onWheel, { passive: false });
+    if (!hasSectionsBelow) {
+        const onWheel = (e) => {
+            if (document.body.classList.contains('menu-open')) return;
+            e.preventDefault();
+            if (locked) return;
+            if (Math.abs(e.deltaY) < 8) return;
+            const next = index + (e.deltaY > 0 ? 1 : -1);
+            if (next === index || next < 0 || next > slides.length - 1) return;
+            locked = true;
+            show(next);
+            restartAuto();
+            setTimeout(() => { locked = false; }, 750);
+        };
+        window.addEventListener('wheel', onWheel, { passive: false });
+
+        // Keyboard up/down arrows cycle slides (only on the fixed single-screen page)
+        document.addEventListener('keydown', (e) => {
+            if (document.body.classList.contains('menu-open')) return;
+            if (e.key === 'ArrowDown') { e.preventDefault(); show(index + 1); restartAuto(); }
+            if (e.key === 'ArrowUp')   { e.preventDefault(); show(index - 1); restartAuto(); }
+        });
+    }
 
     dots.forEach((d, n) => d.addEventListener('click', () => { show(n); restartAuto(); }));
-
-    // Keyboard up/down arrows
-    document.addEventListener('keydown', (e) => {
-        if (document.body.classList.contains('menu-open')) return;
-        if (e.key === 'ArrowDown') { e.preventDefault(); show(index + 1); restartAuto(); }
-        if (e.key === 'ArrowUp')   { e.preventDefault(); show(index - 1); restartAuto(); }
-    });
 
     startAuto();
 })();
@@ -169,4 +173,125 @@
             setTimeout(closeMenu, 0);
         });
     });
+})();
+
+/* Inventory carousel (index2): render cards from data (repeated for now) + arrow nav. */
+(function () {
+    const track = document.getElementById('inv-track');
+    if (!track) return;
+
+    // Add real cars here later; images live in images/invenotry/
+    const INVENTORY = [
+        { img: 'New 2027 Rolls-Royce Cullinan.jpg', brand: 'Rolls-Royce', model: 'Cullinan',            meta: '2027 · New' },
+        { img: '2026 Bentley Continental GT S V8.jpg', brand: 'Bentley',  model: 'Continental GT S V8', meta: '2026' },
+        { img: '2026 Lamborghini Urus SE.jpg',         brand: 'Lamborghini', model: 'Urus SE',          meta: '2026' },
+        { img: '2026 GMC Yukon XL Denali.jpg',         brand: 'GMC',       model: 'Yukon XL Denali',    meta: '2026' },
+        { img: '2026 GMC HUMMER EV SUV 2X.jpg',        brand: 'GMC',       model: 'Hummer EV SUV 2X',   meta: '2026' },
+    ];
+
+    const REPEAT = 2;   // duplicate the set to fill the carousel until more stock is added
+    const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+    const cardHTML = (c) => `
+        <a class="inv-card" href="#">
+            <div class="inv-card__media">
+                <img src="images/invenotry/${encodeURI(c.img)}" alt="${esc(c.brand + ' ' + c.model)}" loading="lazy" draggable="false">
+            </div>
+            <span class="inv-card__brand">${esc(c.brand)}</span>
+            <h3 class="inv-card__name">${esc(c.model)}</h3>
+            <span class="inv-card__meta">${esc(c.meta)}</span>
+        </a>`;
+
+    let html = '';
+    for (let r = 0; r < REPEAT; r++) html += INVENTORY.map(cardHTML).join('');
+    track.innerHTML = html;
+
+    // Arrow navigation — scroll by one card width
+    const arrows = document.querySelectorAll('.inv-arrow');
+    const step = () => {
+        const card = track.querySelector('.inv-card');
+        const gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0) || 24;
+        return card ? card.getBoundingClientRect().width + gap : 360;
+    };
+    let momentumId = null;
+    const cancelMomentum = () => { if (momentumId) cancelAnimationFrame(momentumId); momentumId = null; };
+
+    arrows.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            cancelMomentum();
+            const dir = Number(btn.dataset.dir) || 1;
+            track.scrollBy({ left: dir * step(), behavior: 'smooth' });
+        });
+    });
+
+    // Drag-to-scroll with inertia (mouse / pointer). Touch scrolls natively.
+    let down = false, moved = false, startX = 0, startScroll = 0;
+    let lastX = 0, lastT = 0, vel = 0;   // vel = pointer px per ms
+
+    track.addEventListener('pointerdown', (e) => {
+        if (e.pointerType === 'touch') return;   // native touch handles its own momentum
+        e.preventDefault();                      // stop image/link ghost-drag + text select
+        cancelMomentum();
+        down = true;
+        moved = false;
+        startX = lastX = e.pageX;
+        startScroll = track.scrollLeft;
+        lastT = e.timeStamp;
+        vel = 0;
+        track.classList.add('is-dragging');
+        track.setPointerCapture(e.pointerId);
+    });
+
+    track.addEventListener('pointermove', (e) => {
+        if (!down) return;
+        const dx = e.pageX - startX;
+        if (Math.abs(dx) > 4) moved = true;
+        track.scrollLeft = startScroll - dx;
+        const dt = e.timeStamp - lastT;
+        if (dt > 0) vel = (e.pageX - lastX) / dt;   // smooth-ish instantaneous velocity
+        lastX = e.pageX;
+        lastT = e.timeStamp;
+    });
+
+    const endDrag = (e) => {
+        if (!down) return;
+        down = false;
+        try { track.releasePointerCapture(e.pointerId); } catch (_) {}
+
+        // Inertia: keep scrolling in the drag direction, decelerating
+        let v = -vel * 16;          // px per frame (~16ms); invert: drag right → scroll left
+        const FRICTION = 0.94;
+        const stop = () => {
+            cancelMomentum();
+            track.classList.remove('is-dragging');   // re-enables proximity snap → settles
+        };
+        if (Math.abs(v) < 0.5) { stop(); return; }
+        const stepMomentum = () => {
+            track.scrollLeft += v;
+            v *= FRICTION;
+            const maxScroll = track.scrollWidth - track.clientWidth;
+            if (Math.abs(v) < 0.5 || track.scrollLeft <= 0 || track.scrollLeft >= maxScroll) {
+                stop();
+                return;
+            }
+            momentumId = requestAnimationFrame(stepMomentum);
+        };
+        momentumId = requestAnimationFrame(stepMomentum);
+    };
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+
+    // Suppress the card-link click if the pointer was dragged
+    track.addEventListener('click', (e) => {
+        if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; }
+    }, true);
+})();
+
+/* Sticky header: add a solid backdrop once the page is scrolled. */
+(function () {
+    const nav = document.querySelector('.nav');
+    if (!nav) return;
+    const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 })();
