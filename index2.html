@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KERBECK</title>
 
-    <!-- Google Fonts: Roboto Condensed (display) + Inter (text) -->
+    <!-- Google Fonts: Roboto + Roboto Condensed -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Roboto+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Roboto+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,7 +24,7 @@
                     },
                     fontFamily: {
                         display: ['"Roboto Condensed"', 'sans-serif'],
-                        sans:    ['Inter', 'system-ui', 'sans-serif']
+                        sans:    ['Roboto', 'system-ui', 'sans-serif']
                     }
                 }
             }
@@ -45,6 +45,7 @@
 
         <!-- ============ NAV ============ -->
         <header class="nav">
+            <div class="nav__blur" aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             <button type="button" class="nav__menu" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
                 <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
                 <span class="nav__menu-label">Menu</span>
@@ -200,7 +201,82 @@
 
         <!-- Cards rendered by script.js from the INVENTORY data (repeated for now) -->
         <div class="inv-track" id="inv-track"></div>
+
+        <div class="inventory__more">
+            <a class="cta hero__btn" href="#"><span>View All Inventory</span></a>
+        </div>
     </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+        <div class="footer__grid">
+            <div class="footer__col footer__brand">
+                <span class="footer__eyebrow">Get in touch</span>
+                <h2 class="footer__heading">Visit Our Showroom</h2>
+                <a class="footer__logo" href="/" aria-label="KERBECK — home">
+                    <img src="images/logo-kerbeck.svg" alt="KERBECK">
+                </a>
+                <p class="footer__since">FC Kerbeck · Prestige Imports.<br>Luxury &amp; exotic automobiles since 1899.</p>
+            </div>
+
+            <div class="footer__col">
+                <span class="footer__label">Sales Hours</span>
+                <ul class="footer__hours">
+                    <li><span>Mon – Fri</span><span>9:00 AM – 8:00 PM</span></li>
+                    <li><span>Saturday</span><span>9:00 AM – 6:00 PM</span></li>
+                    <li><span>Sunday</span><span>Closed</span></li>
+                </ul>
+            </div>
+
+            <div class="footer__col">
+                <span class="footer__label">Service Hours</span>
+                <ul class="footer__hours">
+                    <li><span>Mon – Fri</span><span>7:30 AM – 7:00 PM</span></li>
+                    <li><span>Saturday</span><span>8:00 AM – 1:00 PM</span></li>
+                    <li><span>Sunday</span><span>Closed</span></li>
+                </ul>
+            </div>
+
+            <div class="footer__col">
+                <span class="footer__label">Visit Us</span>
+                <address class="footer__addr">
+                    100 Route 73 North<br>
+                    Palmyra, NJ 08065<br>
+                    <a href="tel:+18568298200">856-829-8200</a>
+                </address>
+                <div class="footer__social">
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3l.4-3H14V4.5c0-.9.3-1.5 1.6-1.5H17V.3C16.7.2 15.8 0 14.7 0 12.3 0 11 1.4 11 3.9V6H8v3h3v9h3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 8.5l5.5 3.5L10 15.5z" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buy With Confidence (pre-owned disclosure) -->
+        <div class="footer__confidence">
+            <span class="footer__label">Buy With Confidence</span>
+            <p>We disclose every pre-owned vehicle with a minimum of $1000 prior repairs, when most dealers fail to disclose any/all repairs. Our goal is to provide you with the details of the vehicle's history so you can buy with confidence here at Kerbeck.</p>
+        </div>
+
+        <!-- Fine-print disclaimer (centered) -->
+        <div class="footer__legal">
+            <p>*Price(s) include(s) all costs to be paid by a consumer, except for licensing cost, registration fees, and taxes.</p>
+            <p>Currently, FC Kerbeck does not sell or lease cars in the states of MT, OR, NH or AK, sorry for any inconvenience. FC Kerbeck makes every effort to provide full and accurate information. However, because errors may occur, please contact us to verify options, prices and rebate/incentive information before purchasing. All vehicles are subject to prior sale. All new vehicle prices include the destination charge (freight cost). All prices exclude state taxes and fees, motor vehicle registration charges, and processing fees. All taxes and fees will be paid to the legally appropriate states. Prices may not be combined with any other past, present, or future offers or advertised promotions or specials. Prior sales, inbound and ordered vehicles excluded from current price offers. Sale to ultimate retail consumer only, one vehicle per customer. No sale or lease to auto dealers, dealer's agents, management, sales staff or employees of dealers, leasing companies, brokers, exporters, etc. No sale to any person or company appearing on any export list or which has the same address as any person or company appearing on any export list. To that same end, FC Kerbeck reserves the right, at any point during a transaction, to prevent sale to any person or company that may not be a permanent resident of the US, may live or work outside of the US.</p>
+        </div>
+
+        <div class="footer__bottom">
+            <span>© 2026 FC Kerbeck · Prestige Imports. All rights reserved.</span>
+            <span class="footer__links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Sitemap</a></span>
+        </div>
+
+        <p class="footer__powered">Powered by All Auto Network</p>
+    </footer>
 
     <!-- ============ FULLSCREEN MENU OVERLAY ============ -->
     <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Main menu" aria-hidden="true">
@@ -221,6 +297,27 @@
                     <li class="menu__item"><a class="menu__link" href="#contact" data-img="images/menu/nav_contact.jpg"><span class="menu__text"><span class="menu__text-a">Contact</span><span class="menu__text-b" aria-hidden="true">Contact</span></span></a></li>
                 </ul>
             </nav>
+        </div>
+    </div>
+
+    <!-- ============ CONTACT SLIDE-IN PANEL ============ -->
+    <div class="contact-panel" id="contact-panel" role="dialog" aria-modal="true" aria-label="Contact us" aria-hidden="true">
+        <div class="contact-panel__inner">
+            <button type="button" class="contact-panel__close" aria-label="Close">&times;</button>
+            <span class="contact-panel__eyebrow">Get in touch</span>
+            <h2 class="contact-panel__title">Contact Us</h2>
+            <p class="contact-panel__sub">Questions about a vehicle, financing or service? Send us a message and we&rsquo;ll get right back to you.</p>
+            <form class="contact-panel__form" novalidate>
+                <input type="text" name="name" placeholder="Name" aria-label="Name">
+                <input type="email" name="email" placeholder="Email" aria-label="Email">
+                <input type="tel" name="phone" placeholder="Phone" aria-label="Phone">
+                <textarea name="message" rows="4" placeholder="Message" aria-label="Message"></textarea>
+                <button type="submit" class="cta hero__btn contact-panel__send"><span>Send Message</span></button>
+            </form>
+            <div class="contact-panel__meta">
+                100 Route 73 North, Palmyra, NJ 08065<br>
+                <a href="tel:+18568298200">856-829-8200</a>
+            </div>
         </div>
     </div>
 

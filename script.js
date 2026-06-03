@@ -329,3 +329,34 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 })();
+
+/* Contact slide-in panel: opens on any Contact trigger, slides from the right. */
+(function () {
+    const panel = document.getElementById('contact-panel');
+    if (!panel) return;
+    const openers = document.querySelectorAll('.nav__contact, a[href="#contact"]');
+    const closeBtn = panel.querySelector('.contact-panel__close');
+
+    const open = () => {
+        panel.classList.add('is-open');
+        panel.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('contact-open');
+    };
+    const close = () => {
+        panel.classList.remove('is-open');
+        panel.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('contact-open');
+    };
+
+    openers.forEach((a) => a.addEventListener('click', (e) => {
+        e.preventDefault();
+        // if the fullscreen menu is open, let it close first
+        document.body.classList.remove('menu-open');
+        open();
+    }));
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    panel.addEventListener('click', (e) => { if (e.target === panel) close(); });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && panel.classList.contains('is-open')) close();
+    });
+})();
