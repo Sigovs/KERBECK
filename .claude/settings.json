@@ -141,7 +141,15 @@
       "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'Switch display font to Roboto Condensed, remove letter-spacing *)",
       "Bash(perl -0pi -e 's/<body>/<body class=\"v2\">/' index2.html)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/index2.png file://__TRACKED_VAR__/index2.html)",
-      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'Add index2.html variant: boxes left, pagination dots right *)"
+      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'Add index2.html variant: boxes left, pagination dots right *)",
+      "Bash(perl -0pi -e 's/<body class=\"v2\">/<body>/' index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/newindex.png file://__TRACKED_VAR__/index.html)",
+      "Bash(perl -0pe 's{class=\"sect\" data-sect=\"cadillac\"}{class=\"sect is-open\" data-sect=\"cadillac\"}' index.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=800 --screenshot=/tmp/cad.png file://__TRACKED_VAR__/_c.html)",
+      "Bash(sips -c 200 900 --cropOffset 880 600 /tmp/cad.png --out /tmp/cad_z.png)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=800 --screenshot=/tmp/cad2.png file://__TRACKED_VAR__/_c.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=800 --screenshot=/tmp/fix.png file://__TRACKED_VAR__/_d.html)",
+      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'Make index2 the main index; fix box close overshoot; center Cadillac logo *)"
     ],
     "additionalDirectories": [
       "/private/tmp"

@@ -215,7 +215,7 @@ img { display: block; max-width: 100%; }
 /* Slide indicator dots */
 .hero__dots {
     position: absolute;
-    left: clamp(1.5rem, 6.15vw, 118px);
+    right: clamp(1.5rem, 6.15vw, 118px);
     bottom: clamp(36px, 7vh, 84px);
     z-index: 9;
     display: flex;
@@ -280,7 +280,7 @@ img { display: block; max-width: 100%; }
     z-index: 10;
     display: flex;
     align-items: center;
-    justify-content: flex-end;           /* collapsed buttons hug the right */
+    justify-content: flex-start;         /* collapsed buttons hug the left */
     gap: clamp(10px, 0.9vw, 18px);
     padding: 0 clamp(1.5rem, 6.15vw, 118px);
 }
@@ -288,6 +288,7 @@ img { display: block; max-width: 100%; }
 /* ---------- Collapsible section (compact button that opens on hover) ---------- */
 .sect {
     flex: 0 0 clamp(170px, 14vw, 210px); /* collapsed = equal fixed width */
+    max-width: clamp(170px, 14vw, 210px); /* keep a length max-width so closing animates length→length (no overshoot) */
     min-width: 0;
     height: 124px;                       /* same height open & closed */
     display: flex;
@@ -319,6 +320,9 @@ img { display: block; max-width: 100%; }
 /* Buick GMC & Cadillac open narrower than Premium (fewer logos) */
 .sect[data-sect="gmc"].is-open { max-width: clamp(520px, 44vw, 780px); }
 .sect[data-sect="cadillac"].is-open { max-width: clamp(380px, 30vw, 520px); }
+/* Single Cadillac logo: center it inside the box */
+.sect[data-sect="cadillac"] .sect__content { align-self: center; }
+.sect[data-sect="cadillac"] .brands { justify-content: center; }
 
 .sect__label {
     flex: 0 0 auto;
@@ -660,13 +664,4 @@ body.menu-open { overflow: hidden; }
 
     .nav { padding: 0 1.25rem; }
     .nav__logo img { height: 24px; }
-}
-
-/* ============================================================
-   VARIANT 2 (index2.html) — boxes left, pagination right
-   ============================================================ */
-.v2 .dock { justify-content: flex-start; }
-.v2 .hero__dots {
-    left: auto;
-    right: clamp(1.5rem, 6.15vw, 118px);
 }
