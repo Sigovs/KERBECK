@@ -182,29 +182,63 @@
 
     // Add real cars here later; images live in images/invenotry/
     const INVENTORY = [
-        { img: 'New 2027 Rolls-Royce Cullinan.jpg', brand: 'Rolls-Royce', model: 'Cullinan',            meta: '2027 · New' },
-        { img: '2026 Bentley Continental GT S V8.jpg', brand: 'Bentley',  model: 'Continental GT S V8', meta: '2026' },
-        { img: '2026 Lamborghini Urus SE.jpg',         brand: 'Lamborghini', model: 'Urus SE',          meta: '2026' },
-        { img: '2026 GMC Yukon XL Denali.jpg',         brand: 'GMC',       model: 'Yukon XL Denali',    meta: '2026' },
-        { img: '2026 GMC HUMMER EV SUV 2X.jpg',        brand: 'GMC',       model: 'Hummer EV SUV 2X',   meta: '2026' },
+        { img: 'New 2027 Rolls-Royce Cullinan.jpg', brand: 'Rolls-Royce', model: 'Cullinan',            year: 2027, price: '$560.000', tag: 'New' },
+        { img: '2026 Bentley Continental GT S V8.jpg', brand: 'Bentley',  model: 'Continental GT S V8', year: 2026, price: '$305.000', tag: 'Certified' },
+        { img: '2026 Lamborghini Urus SE.jpg',         brand: 'Lamborghini', model: 'Urus SE',          year: 2026, price: '$295.000', tag: 'Sale Pending' },
+        { img: '2026 GMC Yukon XL Denali.jpg',         brand: 'GMC',       model: 'Yukon XL Denali',    year: 2026, price: '$96.500',  tag: 'Pre-Owned' },
+        { img: '2026 GMC HUMMER EV SUV 2X.jpg',        brand: 'GMC',       model: 'Hummer EV SUV 2X',   year: 2026, price: '$132.000', tag: 'New' },
     ];
 
     const REPEAT = 2;   // duplicate the set to fill the carousel until more stock is added
     const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
+    const SVG = {
+        share: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/><line x1="15.4" y1="6.5" x2="8.6" y2="10.5"/></svg>',
+        save:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+        text:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+    };
+
     const cardHTML = (c) => `
-        <a class="inv-card" href="#">
+        <article class="inv-card">
             <div class="inv-card__media">
-                <img src="images/invenotry/${encodeURI(c.img)}" alt="${esc(c.brand + ' ' + c.model)}" loading="lazy" draggable="false">
+                <a class="inv-card__imglink" href="#" aria-label="${esc(c.brand + ' ' + c.model)}" tabindex="-1">
+                    <img src="images/invenotry/${encodeURI(c.img)}" alt="${esc(c.brand + ' ' + c.model)}" loading="lazy" draggable="false">
+                </a>
+                ${c.tag ? `<span class="inv-card__tag inv-card__tag--${c.tag.toLowerCase().replace(/\s+/g, '-')}">${esc(c.tag)}</span>` : ''}
+                <div class="inv-card__actions">
+                    <button class="inv-act" type="button"><span>Share</span>${SVG.share}</button>
+                    <button class="inv-act" type="button"><span>Save</span>${SVG.save}</button>
+                    <button class="inv-act" type="button"><span>Text</span>${SVG.text}</button>
+                </div>
             </div>
-            <span class="inv-card__brand">${esc(c.brand)}</span>
-            <h3 class="inv-card__name">${esc(c.model)}</h3>
-            <span class="inv-card__meta">${esc(c.meta)}</span>
-        </a>`;
+            <div class="inv-card__body">
+                <span class="inv-card__cond">${esc(c.tag + ' ' + c.year)}</span>
+                <h3 class="inv-card__name">${esc(c.brand + ' ' + c.model)}</h3>
+                <span class="inv-card__price">Price: ${esc(c.price)}</span>
+                <div class="inv-card__foot">
+                    <a class="inv-card__inquire" href="#">Inquire</a>
+                </div>
+            </div>
+        </article>`;
 
     let html = '';
     for (let r = 0; r < REPEAT; r++) html += INVENTORY.map(cardHTML).join('');
     track.innerHTML = html;
+
+    // Scroll-reveal: header + cards float up from below, staggered (staircase)
+    const section = track.closest('.inventory') || track;
+    const cards = Array.from(track.querySelectorAll('.inv-card'));
+    cards.forEach((card, i) => { card.style.transitionDelay = (0.12 + Math.min(i, 6) * 0.1) + 's'; });
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((e) => {
+                if (e.isIntersecting) { section.classList.add('is-in'); io.disconnect(); }
+            });
+        }, { threshold: 0.12 });
+        io.observe(section);
+    } else {
+        section.classList.add('is-in');
+    }
 
     // Arrow navigation — scroll by one card width
     const arrows = document.querySelectorAll('.inv-arrow');

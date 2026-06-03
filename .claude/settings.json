@@ -167,7 +167,27 @@
       "Bash(perl -0pe 's{</head>}{<style>.hero{height:380px!important}</style></head>}' index2.html)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/eyebrow.png file://__TRACKED_VAR__/_iv.html)",
       "Bash(sips --cropToHeightWidth 200 900 /tmp/eyebrow.png --out /tmp/eyebrow_c.png)",
-      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'index2: full-width inventory carousel with drag+inertia, sticky header *)"
+      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'index2: full-width inventory carousel with drag+inertia, sticky header *)",
+      "Bash(perl -0pe 's{</head>}{<style>.hero{height:360px!important}.inv-track .inv-card:first-child .inv-card__actions{opacity:1!important;transform:none!important;pointer-events:auto!important}</style></head>}' index2.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1600 --screenshot=/tmp/actions.png file://__TRACKED_VAR__/_iv.html)",
+      "Bash(perl -0pe 's{</head>}{<style>.hero{height:360px!important}.inv-track .inv-card:first-child .inv-card__actions{opacity:1!important;transform:none!important}</style></head>}' index2.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/darkgrad.png file://__TRACKED_VAR__/_iv.html)",
+      "Bash(perl -0pe 's{</head>}{<style>.hero{height:300px!important}.inv-track .inv-card:first-child .inv-card__actions{opacity:1!important;transform:none!important}</style></head>}' index2.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/micro.png file://__TRACKED_VAR__/_iv.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1400 --screenshot=/tmp/gap.png file://__TRACKED_VAR__/_iv.html)",
+      "Bash(perl -0pe 's{</head>}{<style>.hero{height:300px!important}</style></head>}' index2.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/tags.png file://__TRACKED_VAR__/_iv.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/tags2.png file://__TRACKED_VAR__/_iv.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/tags3.png file://__TRACKED_VAR__/_iv.html)",
+      "Bash(perl -0pe 's{</head>}{<style>.hero{height:280px!important}</style></head>}' index2.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/lay_normal.png file://__TRACKED_VAR__/_a.html)",
+      "Bash(perl -0pe 's{</head>}{<style>.hero{height:280px!important}.inv-track .inv-card:first-child .inv-card__foot{max-height:100px!important;opacity:1!important;margin-top:1.1rem!important;border-top-color:rgba\\(255,255,255,0.1\\)!important}</style></head>}' index2.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/lay_hover.png file://__TRACKED_VAR__/_b.html)",
+      "Bash(perl -0pe 's{</head>}{<style>.hero{height:280px!important}.inv-track .inv-card:first-child .inv-card__actions{opacity:1!important;transform:none!important}.inv-track .inv-card:first-child .inv-card__foot{max-height:100px!important;opacity:1!important;margin-top:1.1rem!important;border-top-color:rgba\\(255,255,255,0.1\\)!important}</style></head>}' index2.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/final2.png file://__TRACKED_VAR__/_x.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1400 --screenshot=/tmp/rest.png file://__TRACKED_VAR__/_n.html)",
+      "Bash(perl -0pe 's{</head>}{<style>.hero{height:300px!important}.inv-track .inv-card:first-child .inv-card__actions{opacity:1!important;transform:none!important}.inv-track .inv-card:first-child .inv-card__foot{opacity:1!important;border-top-color:rgba\\(255,255,255,0.1\\)!important}</style></head>}' index2.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1400 --screenshot=/tmp/hov.png file://__TRACKED_VAR__/_h.html)"
     ],
     "additionalDirectories": [
       "/private/tmp"
