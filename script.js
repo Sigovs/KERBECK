@@ -132,6 +132,7 @@
         toggle.setAttribute('aria-expanded', 'false');
         menu.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('menu-open');
+        menu.querySelectorAll('.menu__sub').forEach((s) => s.classList.remove('is-active'));
         toggle.focus();
     };
 
@@ -161,16 +162,27 @@
         if (e.key === 'Escape' && menu.classList.contains('is-open')) closeMenu();
     });
 
-    // Swap background image on hover/focus of each item; close on navigation
+    // Second-level flyout panels (e.g. New Inventory) — present only on some pages
+    const subs = Array.from(menu.querySelectorAll('.menu__sub'));
+    const showSub = (key) => {
+        subs.forEach((s) => s.classList.toggle('is-active', !!key && s.dataset.for === key));
+        // keep the triggering left-menu item highlighted while its flyout is open
+        links.forEach((l) => l.classList.toggle('is-current', !!key && l.dataset.sub === key));
+    };
+
+    // Swap background image on hover/focus of each item; reveal submenu if any
     links.forEach((link) => {
         const img = link.dataset.img;
-        if (img) {
-            link.addEventListener('mouseenter', () => setBackground(img));
-            link.addEventListener('focus', () => setBackground(img));
-        }
-        link.addEventListener('click', () => {
-            // let in-page anchors work, then close
-            setTimeout(closeMenu, 0);
+        const reveal = () => { if (img) setBackground(img); showSub(link.dataset.sub || null); };
+        link.addEventListener('mouseenter', reveal);
+        link.addEventListener('focus', reveal);
+        link.addEventListener('click', (e) => {
+            if (link.dataset.sub) {           // has a 2nd level → don't navigate/close
+                e.preventDefault();
+                showSub(link.dataset.sub);
+                return;
+            }
+            setTimeout(closeMenu, 0);         // let in-page anchors work, then close
         });
     });
 })();
