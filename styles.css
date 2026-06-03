@@ -661,3 +661,12 @@ body.menu-open { overflow: hidden; }
     .nav { padding: 0 1.25rem; }
     .nav__logo img { height: 24px; }
 }
+
+/* ============================================================
+   VARIANT 2 (index2.html) — boxes left, pagination right
+   ============================================================ */
+.v2 .dock { justify-content: flex-start; }
+.v2 .hero__dots {
+    left: auto;
+    right: clamp(1.5rem, 6.15vw, 118px);
+}

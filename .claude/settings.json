@@ -138,7 +138,10 @@
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/roboto.png file://__TRACKED_VAR__/index.html)",
       "Bash(perl -pi -e 's/letter-spacing:\\\\s*[^;]+;/letter-spacing: 0;/g' styles.css)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/nospacing.png file://__TRACKED_VAR__/index.html)",
-      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'Switch display font to Roboto Condensed, remove letter-spacing *)"
+      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'Switch display font to Roboto Condensed, remove letter-spacing *)",
+      "Bash(perl -0pi -e 's/<body>/<body class=\"v2\">/' index2.html)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1920,1080 --virtual-time-budget=1500 --screenshot=/tmp/index2.png file://__TRACKED_VAR__/index2.html)",
+      "Bash(git -c user.name=Sigovs -c user.email=aangd2@gmail.com commit -q -m 'Add index2.html variant: boxes left, pagination dots right *)"
     ],
     "additionalDirectories": [
       "/private/tmp"
