@@ -1343,3 +1343,31 @@ body.contact-open { overflow: hidden; }
 @media (max-width: 1024px) {
     .menu__sub { left: 0; padding: 6rem clamp(1.5rem, 5vw, 5rem) 2rem; background: rgba(7, 10, 11, 0.92); align-items: flex-start; }
 }
+
+/* ============================================================
+   THEME: dark accent (index3) — replaces the red CTA with graphite
+   ============================================================ */
+body.theme-dark { --cta: #2E3236; }
+
+/* theme-dark (index3): open dock box = bright white fill, black label, darker logo panel */
+body.theme-dark .sect.is-open { background: rgba(255, 255, 255, 0.92); }
+body.theme-dark .sect.is-open .sect__label { color: #0A0A0A; }
+body.theme-dark .sect.is-open .brands { background: rgba(0, 0, 0, 0.62); }
+
+/* ============================================================
+   VARIANT v4 (index4) — brand boxes centered on the hero.
+   Scoped to body.v4 so index2/index3 stay untouched.
+   ============================================================ */
+/* Boxes stay in the bottom dock, but centered horizontally (was flex-start) */
+body.v4 .dock {
+    justify-content: center;
+}
+/* Rotating slogan: centered horizontally instead of pinned left.
+   Slides still animate in from the left; text-align centers title/sub/CTA. */
+body.v4 .hero__slogan {
+    left: 50%;
+    right: auto;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    justify-items: center;
+}
