@@ -1355,19 +1355,196 @@ body.theme-dark .sect.is-open .sect__label { color: #0A0A0A; }
 body.theme-dark .sect.is-open .brands { background: rgba(0, 0, 0, 0.62); }
 
 /* ============================================================
-   VARIANT v4 (index4) — brand boxes centered on the hero.
+   VARIANT v4 (index4) — centered composition with a drop-down logo tray.
+   Slogan (top) → static row of brand boxes (middle) → on hover a wide
+   panel of logos slides in BELOW the row. Boxes never resize.
+   Reuses the existing .sect.is-open toggle (script.js) — no JS change.
    Scoped to body.v4 so index2/index3 stay untouched.
    ============================================================ */
-/* Boxes stay in the bottom dock, but centered horizontally (was flex-start) */
-body.v4 .dock {
-    justify-content: center;
+body.v4 {
+    --v4-box-w: clamp(190px, 16vw, 230px);
+    --v4-box-h: 104px;
+    --v4-gap: 16px;
+    --v4-panel-h: 104px;
+    --v4-row-gap: clamp(10px, 0.9vw, 18px);   /* gap between the 3 boxes */
+    --v4-step: calc(var(--v4-box-w) + var(--v4-row-gap));  /* box-center to box-center */
 }
-/* Rotating slogan: centered horizontally instead of pinned left.
-   Slides still animate in from the left; text-align centers title/sub/CTA. */
+
+/* Rotating slogan: centered horizontally, raised into the upper third.
+   Raised further to open up the gap between it and the boxes below. */
 body.v4 .hero__slogan {
     left: 50%;
     right: auto;
-    transform: translate(-50%, -50%);
+    top: clamp(200px, 25vh, 305px);
+    transform: translateX(-50%);
     text-align: center;
     justify-items: center;
+}
+
+/* Main slogan CTA reversed: white fill + dark text; on hover the dark fill
+   rises and the text turns white (the ::before/::after fill is #141414). */
+body.v4 .hero__slogan .hero__btn {
+    background: #fff;
+    border-color: #fff;
+}
+body.v4 .hero__slogan .hero__btn > span { color: #141414; }
+body.v4 .hero__slogan .hero__btn:hover > span,
+body.v4 .hero__slogan .hero__btn:focus-visible > span { color: #fff; }
+
+/* Dock = the boxes row up top + a reserved tray area below (padding-bottom
+   keeps the tray inside the dock's hover box, so the pointer can travel
+   from a box down into the panel without closing it). */
+body.v4 .dock {
+    bottom: clamp(95px, 16vh, 185px);
+    justify-content: center;
+    align-items: flex-start;
+    gap: var(--v4-row-gap);
+    overflow: visible;
+    padding-bottom: calc(var(--v4-gap) + var(--v4-panel-h));
+}
+
+/* Boxes: fixed equal width, never grow. Label centered, View All under it. */
+body.v4 .sect {
+    flex: 0 0 var(--v4-box-w);
+    max-width: var(--v4-box-w);
+    height: var(--v4-box-h);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    overflow: visible;
+    transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+body.v4 .sect.is-open {
+    flex-grow: 0;
+    max-width: var(--v4-box-w);
+    background: rgba(8, 12, 14, 0.72);   /* same fill as the dropdown panel */
+    border-color: transparent;           /* no outline on hover */
+}
+body.v4 .sect__label {
+    width: 100%;
+    text-align: center;
+}
+/* Box highlight is translucent (not solid white), so keep the label white. */
+body.v4 .sect.is-open .sect__label {
+    color: #fff;
+}
+
+/* View All lives inside the box, revealed when that box is active.
+   It always occupies layout (opacity only) so the box never reflows. */
+/* Collapsed by default (0 height, no margin) → the label sits dead-centre in
+   the box. On hover it expands below the label, which rises as the pair
+   re-centres in the column. */
+body.v4 .sect__all {
+    width: auto;
+    height: 30px;
+    padding: 0 18px;
+    font-size: 12px;
+    white-space: nowrap;
+    /* outline style: subtle dark fill, hairline border */
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    max-height: 0;
+    margin-top: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: max-height 0.4s var(--ease), margin-top 0.4s var(--ease),
+                opacity 0.3s var(--ease), background 0.3s var(--ease),
+                border-color 0.3s var(--ease);
+}
+/* Kill the rising-fill animation — outline button has no fill. */
+body.v4 .sect__all::before,
+body.v4 .sect__all::after { display: none; }
+/* Hover = just a darkening, border slightly brighter. */
+body.v4 .sect__all:hover,
+body.v4 .sect__all:focus-visible {
+    background: rgba(0, 0, 0, 0.32);
+    border-color: rgba(255, 255, 255, 0.55);
+}
+body.v4 .sect__all > span { color: rgba(255, 255, 255, 0.6); }   /* greyed text */
+body.v4 .sect__all:hover > span,
+body.v4 .sect__all:focus-visible > span { color: rgba(255, 255, 255, 0.92); }
+body.v4 .sect.is-open .sect__all {
+    max-height: 30px;
+    margin-top: 18px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* The logo tray: one wide centered band below the row, same size & position
+   for every box (= the Buick dropdown). All three panels stack at the same
+   spot; only the active box's panel fades in. */
+body.v4 .sect__content {
+    position: absolute;
+    top: calc(var(--v4-box-h) + var(--v4-gap));
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    width: calc(3 * var(--v4-box-w) + 2 * var(--v4-row-gap));   /* = width of the 3-box row */
+    max-width: 92vw;
+    height: var(--v4-panel-h);
+    margin: 0;
+    padding: 0 clamp(18px, 2.4vw, 36px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 3vw, 3rem);
+    border-radius: 10px;
+    background: rgba(8, 12, 14, 0.72);
+    border: none;                        /* no outline on the dropdown */
+    -webkit-backdrop-filter: blur(26px);
+    backdrop-filter: blur(26px);
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+}
+body.v4 .sect.is-open .sect__content {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+    margin-left: 0;
+}
+
+/* The box's own backdrop-filter makes it the containing block, so left:50%
+   centers the panel on its OWN box. Shift the side boxes' panels by one
+   box-step so all three land on the SAME centered position (under the row). */
+body.v4 .sect[data-sect="premium"] .sect__content {
+    transform: translateX(calc(-50% + var(--v4-step))) translateY(8px);
+}
+body.v4 .sect[data-sect="premium"].is-open .sect__content {
+    transform: translateX(calc(-50% + var(--v4-step))) translateY(0);
+}
+body.v4 .sect[data-sect="cadillac"] .sect__content {
+    transform: translateX(calc(-50% - var(--v4-step))) translateY(8px);
+}
+body.v4 .sect[data-sect="cadillac"].is-open .sect__content {
+    transform: translateX(calc(-50% - var(--v4-step))) translateY(0);
+}
+
+/* Inside the tray the logos sit directly on the band (no nested box). */
+body.v4 .sect .brands,
+body.v4 .sect.is-open .brands {
+    flex: 0 1 auto;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    justify-content: center;
+    gap: clamp(1.2rem, 3.4vw, 3.4rem);
+}
+/* Premium has 5 logos — tighter gap so they sit closer together. */
+body.v4 .sect[data-sect="premium"] .brands {
+    gap: clamp(0.7rem, 1.8vw, 1.8rem);
+}
+
+/* Logos: dimmed/greyed by default, full white on hover. */
+body.v4 .brands a {
+    opacity: 0.45;
+    transition: opacity 0.3s var(--ease), transform 0.35s var(--ease);
+}
+body.v4 .brands a:hover,
+body.v4 .brands a:focus-visible {
+    opacity: 1;
 }
