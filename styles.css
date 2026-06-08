@@ -1404,30 +1404,30 @@ body.v4 .dock {
 }
 
 /* ------------------------------------------------------------------
-   Short-viewport guards (desktop only). The slogan grows downward from
-   the top while the dock is pinned to the bottom; on screens shorter
-   than ~880px the slogan's CTA button collides with the boxes (e.g. a
-   1440×900 Mac shows ~750px of usable height in the browser). Lift the
-   slogan and drop the dock so the CTA always clears the boxes.
-   ------------------------------------------------------------------ */
-@media (min-width: 901px) and (max-height: 880px) {
-    body.v4 .hero__slogan { top: clamp(140px, 19vh, 210px); }
-    body.v4 .dock        { bottom: clamp(70px, 10vh, 120px); }
+   Short-viewport guard (desktop only). The slogan grows downward from
+   the top while the dock is pinned to the bottom; below ~820px the
+   slogan's CTA starts to collide with the boxes (a 1440×900 Mac shows
+   ~750px of usable height in the browser). Keep the slogan where it is
+   and only nudge the dock down just enough to clear — the drop is tuned
+   to match the original spacing exactly at the 820px threshold, so there
+   is no visible jump, and it stays a constant ~30px clearance below it. */
+@media (min-width: 901px) and (max-height: 820px) {
+    body.v4 .dock { bottom: clamp(60px, calc(100vh - 690px), 160px); }
 }
 
-/* Very short viewports (e.g. 1366×768): also compress the dock + slogan
-   so the whole composition fits without overlap. Shrinking the v4 vars
-   recomputes the tray reservation consistently (it's all derived). */
+/* Very short viewports (e.g. 1366×768 ≈ 660px usable): the slogan + boxes
+   + tray no longer fit at full size, so compress the dock (shrinking the
+   v4 vars recomputes the tray reservation consistently) and the slogan
+   type. Boxes stay near the bottom; the hero car fills the middle. */
 @media (min-width: 901px) and (max-height: 720px) {
     body.v4 {
-        --v4-box-h: 86px;
-        --v4-panel-h: 86px;
+        --v4-box-h: 90px;
+        --v4-panel-h: 90px;
         --v4-gap: 12px;
     }
-    body.v4 .hero__slogan { top: clamp(120px, 15vh, 180px); }
     body.v4 .hero__slogan-title { font-size: clamp(1.5rem, 2.6vw, 2.4rem); }
     body.v4 .hero__slogan .hero__btn { margin-top: 0.8rem; height: 42px; }
-    body.v4 .dock { bottom: clamp(56px, 8vh, 96px); }
+    body.v4 .dock { bottom: clamp(50px, calc(100vh - 650px), 140px); }
 }
 
 /* Boxes: fixed equal width, never grow. Label centered, View All under it. */
