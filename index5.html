@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARTHAUS — Luxury Residential Construction &amp; Remodeling</title>
+<meta name="description" content="ARTHAUS is a boutique residential construction firm crafting luxury renovations, custom homes and remodels for discerning homeowners. White-glove project management. Exceptional craftsmanship.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   ARTHAUS — luxury residential construction landing
+   Self-contained: tokens, type, layout, components, motion.
+   ============================================================ */
+:root{
+  --ink:#1b1714;          /* warm near-black */
+  --charcoal:#2a2521;     /* panels on dark */
+  --stone:#6d645b;        /* warm taupe text */
+  --stone-soft:#8c8378;
+  --sand:#b8a890;         /* natural wood / sand */
+  --brass:#9c7c4d;        /* refined metallic accent */
+  --bone:#f7f3ed;         /* warm white page bg */
+  --cream:#efe8dd;        /* soft section bg */
+  --paper:#fbf9f5;
+  --line:rgba(27,23,20,.12);
+  --line-soft:rgba(27,23,20,.07);
+  --line-dark:rgba(247,243,237,.14);
+  --shadow:0 30px 70px -30px rgba(27,23,20,.35);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --container:1280px;
+  --gutter:clamp(20px,5vw,80px);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bone);
+  color:var(--ink);
+  line-height:1.6;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--ink);color:var(--bone)}
+
+/* ---------- shared type ---------- */
+.serif{font-family:'Cormorant Garamond',Georgia,serif}
+.eyebrow{
+  font-size:11px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--brass);display:inline-flex;align-items:center;gap:.85em;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:currentColor;opacity:.6}
+.eyebrow.is-center::before{display:none}
+.eyebrow.is-light{color:var(--sand)}
+
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;line-height:1.04;letter-spacing:.005em}
+.h-display{font-size:clamp(2.6rem,6vw,5.4rem);font-weight:500}
+.h-section{font-size:clamp(2.1rem,3.8vw,3.6rem)}
+.lead{font-size:clamp(1rem,1.15vw,1.15rem);color:var(--stone);font-weight:300;max-width:46ch}
+
+.container{max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter)}
+.section{padding-block:clamp(72px,11vh,150px)}
+.section-head{max-width:640px}
+.section-head.is-center{margin-inline:auto;text-align:center}
+.section-head .h-section{margin-top:.5rem}
+.section-head .lead{margin-top:1.25rem}
+
+/* ---------- buttons ---------- */
+.btn{
+  --bg:var(--ink);--fg:var(--bone);--bd:var(--ink);
+  display:inline-flex;align-items:center;justify-content:center;gap:.7em;
+  height:54px;padding:0 2rem;border:1px solid var(--bd);background:var(--bg);color:var(--fg);
+  font-family:'Inter',sans-serif;font-size:12.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;
+  border-radius:2px;cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease),background .4s var(--ease),color .4s var(--ease),border-color .4s var(--ease);
+}
+.btn span{position:relative;z-index:1}
+.btn .ar{transition:transform .5s var(--ease)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 18px 34px -16px rgba(27,23,20,.55)}
+.btn:hover .ar{transform:translateX(4px)}
+.btn--ghost{--bg:transparent;--fg:var(--ink);--bd:var(--line)}
+.btn--ghost:hover{--bg:var(--ink);--fg:var(--bone);--bd:var(--ink)}
+.btn--light{--bg:var(--bone);--fg:var(--ink);--bd:var(--bone)}
+.btn--outline-light{--bg:transparent;--fg:var(--bone);--bd:rgba(247,243,237,.45)}
+.btn--outline-light:hover{--bg:var(--bone);--fg:var(--ink);--bd:var(--bone)}
+.btn--block{width:100%}
+
+.txtlink{display:inline-flex;align-items:center;gap:.6em;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding-bottom:4px;border-bottom:1px solid var(--line);transition:gap .4s var(--ease),border-color .4s var(--ease)}
+.txtlink:hover{gap:1em;border-color:var(--ink)}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-head{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;gap:2rem;
+  padding:clamp(16px,2.4vw,30px) var(--gutter);
+  transition:background .5s var(--ease),padding .5s var(--ease),box-shadow .5s var(--ease),border-color .5s var(--ease);
+  border-bottom:1px solid transparent;color:var(--bone);
+}
+.site-head.is-scrolled{
+  background:rgba(251,249,245,.86);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  color:var(--ink);border-color:var(--line-soft);padding-block:14px;box-shadow:0 1px 0 rgba(27,23,20,.04);
+}
+.brand{display:flex;flex-direction:column;line-height:1;gap:3px;z-index:2}
+.brand__name{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;letter-spacing:.14em}
+.brand__sub{font-size:9px;letter-spacing:.34em;text-transform:uppercase;opacity:.7;font-weight:500}
+.nav{display:flex;align-items:center;gap:clamp(18px,2vw,38px)}
+.nav a{font-size:12px;letter-spacing:.13em;text-transform:uppercase;font-weight:400;position:relative;opacity:.9}
+.nav a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:currentColor;transition:width .4s var(--ease)}
+.nav a:hover{opacity:1}
+.nav a:hover::after{width:100%}
+.head-cta{display:flex;align-items:center;gap:18px}
+.head-cta .btn{height:44px;padding:0 1.4rem}
+.site-head:not(.is-scrolled) .head-cta .btn{--bg:transparent;--fg:var(--bone);--bd:rgba(247,243,237,.4)}
+.site-head:not(.is-scrolled) .head-cta .btn:hover{--bg:var(--bone);--fg:var(--ink);--bd:var(--bone)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px;color:inherit}
+.burger span{width:24px;height:1.5px;background:currentColor;transition:transform .4s var(--ease),opacity .3s}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;color:var(--bone);overflow:hidden}
+.hero__media{position:absolute;inset:0;z-index:0}
+.hero__media img,.hero__media video{width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.06);animation:heroZoom 18s var(--ease-out) forwards}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero__media::after{content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(18,15,12,.82) 0%,rgba(18,15,12,.5) 32%,rgba(18,15,12,.12) 58%,rgba(18,15,12,.32) 100%),
+    linear-gradient(180deg,rgba(18,15,12,.5) 0%,rgba(18,15,12,.22) 30%,rgba(18,15,12,.4) 66%,rgba(18,15,12,.82) 100%);}
+.hero__inner{position:relative;z-index:1;width:100%;max-width:var(--container);margin-inline:auto;padding:0 var(--gutter) clamp(56px,9vh,120px)}
+.hero__eyebrow{opacity:0;transform:translateY(18px);animation:rise .9s var(--ease-out) .25s forwards}
+.hero h1{margin:1.4rem 0 0;max-width:16ch;text-shadow:0 2px 40px rgba(0,0,0,.35)}
+.hero h1 em{font-style:italic;color:var(--sand)}
+.hero__sub{margin-top:1.6rem;max-width:42ch;font-size:clamp(1rem,1.2vw,1.18rem);color:rgba(247,243,237,.82);font-weight:300;
+  opacity:0;transform:translateY(22px);animation:rise 1s var(--ease-out) .55s forwards}
+.hero__cta{margin-top:2.4rem;display:flex;flex-wrap:wrap;gap:14px;
+  opacity:0;transform:translateY(22px);animation:rise 1s var(--ease-out) .7s forwards}
+.hero__meta{margin-top:clamp(34px,6vh,64px);display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,64px);
+  padding-top:26px;border-top:1px solid rgba(247,243,237,.16);
+  opacity:0;transform:translateY(22px);animation:rise 1s var(--ease-out) .85s forwards}
+.hero__meta div{display:flex;flex-direction:column;gap:2px}
+.hero__meta .n{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,2.4vw,2.4rem);font-weight:500;line-height:1}
+.hero__meta .l{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,243,237,.6)}
+.hero__scroll{position:absolute;right:var(--gutter);bottom:clamp(40px,8vh,90px);z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;
+  font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:rgba(247,243,237,.65);writing-mode:vertical-rl}
+.hero__scroll i{width:1px;height:54px;background:linear-gradient(rgba(247,243,237,.6),transparent);position:relative;overflow:hidden}
+.hero__scroll i::after{content:"";position:absolute;top:-50%;left:0;width:100%;height:50%;background:var(--bone);animation:scrolldot 2.4s var(--ease-out) infinite}
+@keyframes scrolldot{0%{top:-50%}60%,100%{top:120%}}
+@keyframes rise{to{opacity:1;transform:none}}
+
+/* ============================================================
+   SCROLL REVEAL (generic)
+   ============================================================ */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease-out),transform 1s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+/* parallax media */
+.px{transform:translate3d(0,0,0) scale(1.16);will-change:transform}
+/* staircase title slide-in (each line cascades in from the side) */
+.t-stagger{overflow:hidden;padding:.14em 0;margin:-.14em 0}
+.t-stagger>span{display:block;opacity:0;transform:translateX(-52px);
+  transition:opacity .85s var(--ease-out),transform .95s var(--ease-out)}
+.t-stagger.in>span{opacity:1;transform:none}
+.t-stagger.in>span:nth-child(1){transition-delay:.06s}
+.t-stagger.in>span:nth-child(2){transition-delay:.20s}
+.t-stagger.in>span:nth-child(3){transition-delay:.34s}
+.t-stagger>span>em{font-style:italic}
+.reveal[data-d="1"]{transition-delay:.08s}
+.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}
+.reveal[data-d="4"]{transition-delay:.32s}
+
+/* ============================================================
+   SERVICES
+   ============================================================ */
+.services{background:var(--paper)}
+.services__top{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:clamp(40px,5vw,64px)}
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.4vw,22px)}
+.svc{position:relative;display:block;overflow:hidden;border-radius:3px;background:var(--ink);isolation:isolate}
+.svc__img{aspect-ratio:4/5;overflow:hidden}
+.svc__img img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease-out),filter 1.1s var(--ease)}
+.svc::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(20,17,14,0) 38%,rgba(20,17,14,.5) 72%,rgba(20,17,14,.9) 100%)}
+.svc__body{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:clamp(18px,1.6vw,26px);color:var(--bone)}
+.svc__num{font-size:10px;letter-spacing:.24em;color:var(--sand);opacity:.85}
+.svc__title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.35rem,1.7vw,1.7rem);font-weight:500;line-height:1.08;margin-top:8px}
+.svc__desc{font-size:12.5px;color:rgba(247,243,237,.78);margin-top:8px;max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .6s var(--ease),opacity .5s var(--ease),margin-top .5s var(--ease)}
+.svc__more{display:inline-flex;align-items:center;gap:.5em;margin-top:12px;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--sand);opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease) .05s,transform .5s var(--ease) .05s}
+.svc:hover .svc__img img{transform:scale(1.07)}
+.svc:hover .svc__desc{max-height:80px;opacity:1;margin-top:10px}
+.svc:hover .svc__more{opacity:1;transform:none}
+
+/* ============================================================
+   FEATURED PROJECTS
+   ============================================================ */
+.work__top{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-bottom:clamp(36px,4vw,56px)}
+/* before / after slider */
+.ba{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:4px;user-select:none;cursor:ew-resize;box-shadow:var(--shadow)}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba__after{clip-path:inset(0 0 0 50%);}
+.ba__tag{position:absolute;top:18px;z-index:3;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--bone);
+  background:rgba(20,17,14,.55);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);padding:7px 13px;border-radius:2px}
+.ba__tag--b{left:18px}.ba__tag--a{right:18px}
+.ba__handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:var(--bone);z-index:4;transform:translateX(-50%)}
+.ba__grip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:50%;
+  background:var(--bone);color:var(--ink);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.ba__grip svg{width:22px;height:22px}
+.work__cap{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;margin-top:20px}
+.work__cap h3{font-size:clamp(1.4rem,2vw,1.9rem)}
+.work__cap p{font-size:13px;color:var(--stone);letter-spacing:.04em}
+
+/* portfolio grid */
+.folio{margin-top:clamp(40px,5vw,72px);display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(14px,1.4vw,20px)}
+.folio a{position:relative;overflow:hidden;border-radius:3px;background:var(--ink);display:block}
+.folio img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease-out)}
+.folio a::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(20,17,14,.82));opacity:0;transition:opacity .5s var(--ease)}
+.folio__cap{position:absolute;left:20px;bottom:18px;z-index:2;color:var(--bone);opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.folio__cap .t{font-family:'Cormorant Garamond',serif;font-size:1.4rem;line-height:1.1}
+.folio__cap .s{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sand);margin-top:4px}
+.folio a:hover img{transform:scale(1.06)}
+.folio a:hover::after{opacity:1}
+.folio a:hover .folio__cap{opacity:1;transform:none}
+.folio .lg{grid-column:span 3;aspect-ratio:3/2}
+.folio .sm{grid-column:span 3;aspect-ratio:3/2}
+@media(min-width:900px){.folio .tall{grid-row:span 2;aspect-ratio:auto}}
+
+/* ============================================================
+   WHY US
+   ============================================================ */
+.why{background:var(--cream)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(2px,.1vw,2px);margin-top:clamp(40px,5vw,64px);
+  border:1px solid var(--line-soft);background:var(--line-soft)}
+.why-cell{background:var(--cream);padding:clamp(28px,3vw,48px)}
+.why-cell .ic{width:34px;height:34px;color:var(--brass);margin-bottom:20px}
+.why-cell .ic svg{width:100%;height:100%;stroke:currentColor;stroke-width:1.1;fill:none}
+.why-cell h3{font-size:clamp(1.3rem,1.7vw,1.6rem)}
+.why-cell p{margin-top:10px;font-size:14px;color:var(--stone)}
+
+/* ============================================================
+   PROCESS (dark)
+   ============================================================ */
+.process{background:var(--ink);color:var(--bone)}
+.process .lead{color:var(--stone-soft)}
+.steps{margin-top:clamp(46px,6vw,76px);display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative}
+.step{position:relative;padding:0 clamp(14px,1.6vw,26px)}
+.step:not(:last-child){border-right:1px solid var(--line-dark)}
+.step__n{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:.2em;color:var(--brass)}
+.step__dot{width:11px;height:11px;border-radius:50%;border:1px solid var(--brass);margin:18px 0;position:relative}
+.step__dot::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--brass);transform:scale(0);transition:transform .6s var(--ease)}
+.step.in .step__dot::after{transform:scale(1)}
+.step h3{font-size:clamp(1.25rem,1.6vw,1.55rem);margin-bottom:8px}
+.step p{font-size:13px;color:var(--stone-soft);max-width:24ch}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.quotes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,1.6vw,26px);margin-top:clamp(40px,5vw,60px)}
+.quote{background:var(--paper);border:1px solid var(--line-soft);border-radius:4px;padding:clamp(28px,3vw,42px);display:flex;flex-direction:column}
+.quote .mark{font-family:'Cormorant Garamond',serif;font-size:4rem;line-height:.6;color:var(--sand);height:34px}
+.quote blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,1.55vw,1.55rem);line-height:1.34;font-weight:500;color:var(--ink);margin:18px 0 26px;font-style:italic}
+.quote__who{margin-top:auto;display:flex;flex-direction:column;gap:2px}
+.quote__who .nm{font-size:13px;font-weight:500;letter-spacing:.04em}
+.quote__who .lc{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone-soft)}
+.quote__stars{display:flex;gap:3px;margin-bottom:6px;color:var(--brass)}
+.quote__stars svg{width:14px;height:14px;fill:currentColor}
+
+/* ============================================================
+   ABOUT (split)
+   ============================================================ */
+.about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,90px);align-items:center}
+.about__media{position:relative;border-radius:4px;overflow:hidden;box-shadow:var(--shadow)}
+.about__media img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3.2}
+.about__badge{position:absolute;left:24px;bottom:24px;background:rgba(251,249,245,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  padding:16px 22px;border-radius:3px}
+.about__badge .n{font-family:'Cormorant Garamond',serif;font-size:2rem;line-height:1;font-weight:600}
+.about__badge .l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);margin-top:4px}
+.about__text .h-section{margin-top:.6rem}
+.about__text p{margin-top:1.3rem;color:var(--stone);font-size:15px;max-width:52ch}
+.about__sign{margin-top:2rem;display:flex;align-items:center;gap:18px}
+.about__sign .sig{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.8rem}
+.about__sign .who{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone-soft);line-height:1.5}
+.stats{display:flex;gap:clamp(24px,3vw,48px);margin-top:2.4rem;padding-top:2rem;border-top:1px solid var(--line)}
+.stats div .n{font-family:'Cormorant Garamond',serif;font-size:clamp(1.7rem,2.2vw,2.3rem);line-height:1;font-weight:500}
+.stats div .l{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone-soft);margin-top:6px}
+
+/* ============================================================
+   FINAL CTA
+   ============================================================ */
+.final{position:relative;color:var(--bone);text-align:center;overflow:hidden}
+.final__media{position:absolute;inset:0;z-index:0}
+.final__media img{width:100%;height:100%;object-fit:cover}
+.final__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,14,.74),rgba(20,17,14,.82))}
+.final__inner{position:relative;z-index:1;padding-block:clamp(90px,15vh,180px)}
+.final h2{font-size:clamp(2.4rem,5vw,4.6rem);max-width:18ch;margin-inline:auto}
+.final h2 em{font-style:italic;color:var(--sand)}
+.final p{margin:1.4rem auto 0;max-width:44ch;color:rgba(247,243,237,.82);font-size:1.05rem;font-weight:300}
+.final__cta{margin-top:2.6rem;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.foot{background:var(--ink);color:rgba(247,243,237,.7);padding-top:clamp(60px,8vw,96px)}
+.foot__grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.4fr;gap:clamp(28px,3vw,56px);padding-bottom:clamp(48px,6vw,72px);border-bottom:1px solid var(--line-dark)}
+.foot__brand .brand__name{color:var(--bone);font-size:30px}
+.foot__brand .brand__sub{color:var(--sand);margin-top:6px}
+.foot__brand p{margin-top:18px;font-size:13.5px;max-width:34ch;line-height:1.7}
+.foot__col h4{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--sand);margin-bottom:18px}
+.foot__col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.foot__col a,.foot__col li{font-size:13.5px;transition:color .3s var(--ease)}
+.foot__col a:hover{color:var(--bone)}
+.foot__cta h4{color:var(--sand)}
+.foot__cta p{font-size:13.5px;margin-bottom:18px;line-height:1.7}
+.foot__contact{display:flex;flex-direction:column;gap:8px;margin-bottom:22px;font-size:13.5px}
+.foot__contact a{color:var(--bone)}
+.foot__social{display:flex;gap:12px;margin-top:24px}
+.foot__social a{width:38px;height:38px;border:1px solid var(--line-dark);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .4s var(--ease),color .4s var(--ease),border-color .4s}
+.foot__social a:hover{background:var(--bone);color:var(--ink);border-color:var(--bone)}
+.foot__social svg{width:16px;height:16px;fill:currentColor}
+.foot__bottom{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding-block:26px;font-size:11.5px;letter-spacing:.04em}
+.foot__bottom .links{display:flex;gap:22px}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media(max-width:1080px){
+  .svc-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr);gap:36px 0}
+  .step:nth-child(2n){border-right:0}
+  .quotes-grid{grid-template-columns:1fr}
+  .quote{max-width:640px}
+  .folio{grid-template-columns:repeat(2,1fr)}
+  .folio .lg,.folio .sm,.folio .tall{grid-column:span 1;grid-row:auto;aspect-ratio:3/2}
+}
+@media(max-width:860px){
+  .nav,.head-cta .txt-hide{display:none}
+  .burger{display:flex}
+  .nav.open{display:flex;position:fixed;inset:0;background:var(--ink);color:var(--bone);flex-direction:column;justify-content:center;align-items:center;gap:30px;z-index:40}
+  .nav.open a{font-size:18px}
+  .about-grid{grid-template-columns:1fr;gap:36px}
+  .about__media{order:-1}
+  .foot__grid{grid-template-columns:1fr 1fr}
+  .foot__brand,.foot__cta{grid-column:1 / -1}
+}
+@media(max-width:540px){
+  .svc-grid{grid-template-columns:1fr}
+  .why-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:0!important;border-bottom:1px solid var(--line-dark);padding-bottom:26px}
+  .folio{grid-template-columns:1fr}
+  .hero__meta{gap:22px}
+  .foot__grid{grid-template-columns:1fr}
+  .foot__bottom{justify-content:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important}
+  .reveal,.hero__eyebrow,.hero h1,.hero__sub,.hero__cta,.hero__meta,.t-stagger>span{opacity:1!important;transform:none!important;transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="site-head" id="head">
+  <a class="brand" href="#top" aria-label="ARTHAUS — home">
+    <span class="brand__name">ARTHAUS</span>
+    <span class="brand__sub">Residential Atelier</span>
+  </a>
+  <nav class="nav" id="nav" aria-label="Primary">
+    <a href="#services">Services</a>
+    <a href="#work">Projects</a>
+    <a href="#why">Why Us</a>
+    <a href="#process">Process</a>
+    <a href="#about">About</a>
+  </nav>
+  <div class="head-cta">
+    <a class="btn" href="#contact"><span>Request Consultation</span></a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="hero__media">
+    <video autoplay muted loop playsinline poster="images5/hero.jpg" aria-label="Modern luxury home interior">
+      <source src="images5/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero__inner">
+    <span class="eyebrow is-light hero__eyebrow">Luxury Residential Construction &amp; Remodeling</span>
+    <h1 class="serif t-stagger"><span>Luxury Renovations.</span><span><em>Exceptional</em> Craftsmanship.</span></h1>
+    <p class="hero__sub">A boutique construction firm building and remodeling extraordinary homes for discerning owners — with white-glove project management and an obsession for detail.</p>
+    <div class="hero__cta">
+      <a class="btn btn--light" href="#contact"><span>Request Consultation</span><svg class="ar" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn--outline-light" href="#work"><span>View Portfolio</span></a>
+    </div>
+    <div class="hero__meta">
+      <div><span class="n" data-count="1998" data-prefix="Est.&nbsp;" data-dur="2000">Est.&nbsp;1998</span><span class="l">Family Owned</span></div>
+      <div><span class="n" data-count="180" data-prefix="$" data-suffix="M+">$180M+</span><span class="l">Delivered</span></div>
+      <div><span class="n" data-count="240" data-suffix="+">240+</span><span class="l">Homes Crafted</span></div>
+      <div><span class="n" data-count="98" data-suffix="%">98%</span><span class="l">Referral Rate</span></div>
+    </div>
+  </div>
+  <div class="hero__scroll">Scroll<i></i></div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section class="section services" id="services">
+  <div class="container">
+    <div class="services__top">
+      <div class="section-head reveal">
+        <span class="eyebrow">What We Build</span>
+        <h2 class="h-section t-stagger"><span>A complete craft,</span><span>under one roof.</span></h2>
+      </div>
+      <p class="lead reveal" data-d="1">From a single signature bathroom to ground-up custom homes, every project is led by a dedicated team and held to a single standard — exceptional.</p>
+    </div>
+
+    <div class="svc-grid">
+      <a class="svc reveal" href="#contact"><div class="svc__img"><img src="images5/svc-bathroom.jpg" alt="Luxury bathroom remodel"></div>
+        <div class="svc__body"><span class="svc__num">01</span><h3 class="svc__title">Bathroom Remodeling</h3>
+          <p class="svc__desc">Spa-grade retreats in stone, brass and bespoke joinery.</p>
+          <span class="svc__more">Explore →</span></div></a>
+
+      <a class="svc reveal" data-d="1" href="#contact"><div class="svc__img"><img src="images5/svc-kitchen.jpg" alt="Luxury kitchen renovation"></div>
+        <div class="svc__body"><span class="svc__num">02</span><h3 class="svc__title">Kitchen Remodeling</h3>
+          <p class="svc__desc">Chef-caliber kitchens engineered around how you live.</p>
+          <span class="svc__more">Explore →</span></div></a>
+
+      <a class="svc reveal" data-d="2" href="#contact"><div class="svc__img"><img src="images5/svc-living.jpg" alt="Living room renovation"></div>
+        <div class="svc__body"><span class="svc__num">03</span><h3 class="svc__title">Living Room Renovations</h3>
+          <p class="svc__desc">Light, proportion and warmth, recomposed beautifully.</p>
+          <span class="svc__more">Explore →</span></div></a>
+
+      <a class="svc reveal" data-d="3" href="#contact"><div class="svc__img"><img src="images5/svc-wholehome.jpg" alt="Whole home remodeling"></div>
+        <div class="svc__body"><span class="svc__num">04</span><h3 class="svc__title">Whole-Home Remodeling</h3>
+          <p class="svc__desc">A full reimagining, managed end to end with calm.</p>
+          <span class="svc__more">Explore →</span></div></a>
+
+      <a class="svc reveal" href="#contact"><div class="svc__img"><img src="images5/svc-construction.jpg" alt="Custom home construction"></div>
+        <div class="svc__body"><span class="svc__num">05</span><h3 class="svc__title">Custom Home Construction</h3>
+          <p class="svc__desc">Architect-led builds from foundation to final reveal.</p>
+          <span class="svc__more">Explore →</span></div></a>
+
+      <a class="svc reveal" data-d="1" href="#contact"><div class="svc__img"><img src="images5/svc-additions.jpg" alt="Home additions"></div>
+        <div class="svc__body"><span class="svc__num">06</span><h3 class="svc__title">Home Additions</h3>
+          <p class="svc__desc">Seamless expansions that read as always-there.</p>
+          <span class="svc__more">Explore →</span></div></a>
+
+      <a class="svc reveal" data-d="2" href="#contact"><div class="svc__img"><img src="images5/svc-interior.jpg" alt="Interior finishing and custom carpentry"></div>
+        <div class="svc__body"><span class="svc__num">07</span><h3 class="svc__title">Interior Finishing</h3>
+          <p class="svc__desc">Custom carpentry, millwork and finishes done right.</p>
+          <span class="svc__more">Explore →</span></div></a>
+
+      <a class="svc reveal" data-d="3" href="#contact"><div class="svc__img"><img src="images5/svc-outdoor.jpg" alt="Luxury outdoor living spaces"></div>
+        <div class="svc__body"><span class="svc__num">08</span><h3 class="svc__title">Outdoor Living Spaces</h3>
+          <p class="svc__desc">Pools, terraces and kitchens for the open air.</p>
+          <span class="svc__more">Explore →</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURED PROJECTS ============ -->
+<section class="section" id="work">
+  <div class="container">
+    <div class="work__top">
+      <div class="section-head reveal">
+        <span class="eyebrow">Featured Work</span>
+        <h2 class="h-section t-stagger"><span>Transformations worth</span><span>living in.</span></h2>
+      </div>
+      <a class="txtlink reveal" data-d="1" href="#contact">View full portfolio</a>
+    </div>
+
+    <!-- before / after -->
+    <div class="ba reveal" id="ba">
+      <img class="ba__before" src="images5/proj-before.jpg" alt="Before renovation">
+      <img class="ba__after" id="baAfter" src="images5/proj-after.jpg" alt="After renovation">
+      <span class="ba__tag ba__tag--b">Before</span>
+      <span class="ba__tag ba__tag--a">After</span>
+      <div class="ba__handle" id="baHandle"><div class="ba__grip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></div></div>
+    </div>
+    <div class="work__cap reveal" data-d="1">
+      <h3 class="serif">The Hillcrest Residence — Primary Suite &amp; Bath</h3>
+      <p>Bryn Mawr, PA · Full gut renovation · 14 weeks</p>
+    </div>
+
+    <!-- portfolio grid -->
+    <div class="folio">
+      <a class="lg reveal" href="#contact"><img src="images5/gal-1.jpg" alt="Project">
+        <div class="folio__cap"><div class="t serif">The Devon Estate</div><div class="s">Whole-Home Remodel</div></div></a>
+      <a class="sm reveal" data-d="1" href="#contact"><img src="images5/gal-3.jpg" alt="Project">
+        <div class="folio__cap"><div class="t serif">Linden Row</div><div class="s">Kitchen &amp; Dining</div></div></a>
+      <a class="sm reveal" href="#contact"><img src="images5/gal-2.jpg" alt="Project">
+        <div class="folio__cap"><div class="t serif">Maple &amp; Vine</div><div class="s">Living Renovation</div></div></a>
+      <a class="lg reveal" data-d="1" href="#contact"><img src="images5/gal-4.jpg" alt="Project">
+        <div class="folio__cap"><div class="t serif">The Radnor House</div><div class="s">Spa Bath &amp; Suite</div></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY US ============ -->
+<section class="section why" id="why">
+  <div class="container">
+    <div class="section-head is-center reveal">
+      <span class="eyebrow is-center" style="justify-content:center">Why Homeowners Choose Us</span>
+      <h2 class="h-section t-stagger"><span>Trust, built into</span><span>every detail.</span></h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-cell reveal"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3 class="serif">Licensed &amp; Insured</h3><p>Fully licensed, bonded and insured — your project and property are protected at every stage.</p></div>
+      <div class="why-cell reveal" data-d="1"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 16.5 7.1 18.6 8 13.1l-4-3.9 5.5-.8z"/></svg></div>
+        <h3 class="serif">Premium Materials</h3><p>Sourced stone, hardwood and fixtures from trusted makers — nothing builder-grade, ever.</p></div>
+      <div class="why-cell reveal" data-d="2"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/><path d="M7 14h4"/></svg></div>
+        <h3 class="serif">Dedicated Project Management</h3><p>One point of contact, a live schedule and proactive updates from first sketch to final walkthrough.</p></div>
+      <div class="why-cell reveal"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/></svg></div>
+        <h3 class="serif">Transparent Communication</h3><p>Clear fixed pricing, documented selections and no surprises — you always know exactly where things stand.</p></div>
+      <div class="why-cell reveal" data-d="1"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 8l9-5 9 5M5 8v9a2 2 0 002 2h10a2 2 0 002-2V8"/></svg></div>
+        <h3 class="serif">Custom Design Solutions</h3><p>In-house design and architect partners tailor every space to how you actually live and entertain.</p></div>
+      <div class="why-cell reveal" data-d="2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M14 3l7 7-9 9-4 1 1-4z"/><path d="M11 6l7 7"/></svg></div>
+        <h3 class="serif">Exceptional Craftsmanship</h3><p>Master carpenters and trades who treat your home like their own legacy of work.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROCESS ============ -->
+<section class="section process" id="process">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow is-light">How We Work</span>
+      <h2 class="h-section t-stagger"><span>A calm, deliberate</span><span>process.</span></h2>
+      <p class="lead">Five considered stages that keep your project on time, on budget and entirely transparent.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><span class="step__n">STEP 01</span><div class="step__dot"></div><h3 class="serif">Consultation</h3><p>We listen, walk the space and align on vision, scope and investment.</p></div>
+      <div class="step reveal" data-d="1"><span class="step__n">STEP 02</span><div class="step__dot"></div><h3 class="serif">Design</h3><p>Concepts, materials and 3D visuals refined until it feels exactly right.</p></div>
+      <div class="step reveal" data-d="2"><span class="step__n">STEP 03</span><div class="step__dot"></div><h3 class="serif">Planning</h3><p>Fixed pricing, permits, selections and a transparent build schedule.</p></div>
+      <div class="step reveal" data-d="3"><span class="step__n">STEP 04</span><div class="step__dot"></div><h3 class="serif">Construction</h3><p>Master trades execute with daily oversight and clean, respectful sites.</p></div>
+      <div class="step reveal" data-d="4"><span class="step__n">STEP 05</span><div class="step__dot"></div><h3 class="serif">Final Walkthrough</h3><p>A meticulous reveal, punch-list and warranty — handed over with pride.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="section" id="reviews">
+  <div class="container">
+    <div class="section-head is-center reveal">
+      <span class="eyebrow is-center" style="justify-content:center">Client Voices</span>
+      <h2 class="h-section t-stagger"><span>Held to the highest</span><span>of standards.</span></h2>
+    </div>
+    <div class="quotes-grid">
+      <div class="quote reveal"><span class="mark">&ldquo;</span>
+        <div class="quote__stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg></div>
+        <blockquote>They managed a two-year, whole-home build as if it were effortless. The craftsmanship is simply on another level.</blockquote>
+        <div class="quote__who"><span class="nm">Catherine &amp; James Whitmore</span><span class="lc">Villanova, PA</span></div></div>
+
+      <div class="quote reveal" data-d="1"><span class="mark">&ldquo;</span>
+        <div class="quote__stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg></div>
+        <blockquote>Transparent pricing, immaculate sites and a team that genuinely cared. Our kitchen is the heart of the home now.</blockquote>
+        <div class="quote__who"><span class="nm">Dr. Priya Nair</span><span class="lc">Haverford, PA</span></div></div>
+
+      <div class="quote reveal" data-d="2"><span class="mark">&ldquo;</span>
+        <div class="quote__stars"><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6L12 16.8 6.5 19.2l1-6L3 8.9 9 8z"/></svg></div>
+        <blockquote>We interviewed five firms. ARTHAUS was the only one that felt like a true partner. Worth every dollar.</blockquote>
+        <div class="quote__who"><span class="nm">Michael Castellano</span><span class="lc">Gladwyne, PA</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="section why" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about__media reveal">
+        <img class="px" data-px="0.12" src="images5/about.jpg" alt="ARTHAUS craftsmanship">
+        <div class="about__badge"><div class="n serif">25+</div><div class="l">Years of Craft</div></div>
+      </div>
+      <div class="about__text reveal" data-d="1">
+        <span class="eyebrow">Our Story</span>
+        <h2 class="h-section t-stagger"><span>A private,</span><span>family-owned</span><span>studio of builders.</span></h2>
+        <p>ARTHAUS was founded on a quiet belief: that a home should be built with the same care its owners pour into their lives. Three generations of carpenters and one obsession — getting the details right.</p>
+        <p>We deliberately take on a limited number of projects each year. It is how we protect quality, attention and the relationships that have made us the trusted name for the region's finest homes.</p>
+        <div class="about__sign">
+          <span class="sig">Daniel Hartley</span>
+          <span class="who">Daniel Hartley<br>Founder &amp; Master Builder</span>
+        </div>
+        <div class="stats">
+          <div><div class="n">240+</div><div class="l">Homes Delivered</div></div>
+          <div><div class="n">$180M+</div><div class="l">Built Value</div></div>
+          <div><div class="n">98%</div><div class="l">Client Referrals</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final" id="contact">
+  <div class="final__media"><img class="px" data-px="0.14" src="images5/cta.jpg" alt="Elegant interior"></div>
+  <div class="final__inner container">
+    <span class="eyebrow is-light is-center reveal" style="justify-content:center">Begin Your Project</span>
+    <h2 class="serif t-stagger"><span>Let's Build Something</span><span><em>Exceptional.</em></span></h2>
+    <p class="reveal" data-d="2">Tell us about your home and vision. We'll arrange a private consultation and a tailored proposal within the week.</p>
+    <div class="final__cta reveal" data-d="3">
+      <a class="btn btn--light" href="mailto:studio@arthaus.co"><span>Request Consultation</span><svg class="ar" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn--outline-light" href="tel:+16105550199"><span>(610) 555-0199</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="container">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <span class="brand__name serif">ARTHAUS</span>
+        <div class="brand__sub">Residential Atelier</div>
+        <p>A boutique residential construction &amp; remodeling firm crafting luxury homes for discerning owners since 1998.</p>
+        <div class="foot__social">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="Houzz"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 13v8h-4v-5H12v5H8V3h4v8z"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-3.6 19.3c-.1-.8-.2-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.4 1.8-2.4.9 0 1.3.6 1.3 1.4 0 .9-.6 2.2-.9 3.4-.2 1 .5 1.8 1.5 1.8 1.8 0 3.1-2.3 3.1-5 0-2.1-1.4-3.6-3.9-3.6-2.8 0-4.5 2.1-4.5 4.3 0 .8.2 1.4.6 1.8.2.2.2.3.1.5l-.2.9c-.1.3-.3.4-.5.2-1.1-.5-1.7-1.8-1.7-3.4C5.8 7.5 8 5 12.2 5c3.4 0 5.7 2.4 5.7 5.1 0 3.5-1.9 6-4.7 6-1 0-1.9-.5-2.2-1.1l-.6 2.3c-.2.8-.7 1.7-1 2.3A10 10 0 1012 2z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot__col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Bathroom Remodeling</a></li>
+          <li><a href="#services">Kitchen Remodeling</a></li>
+          <li><a href="#services">Whole-Home Remodel</a></li>
+          <li><a href="#services">Custom Construction</a></li>
+          <li><a href="#services">Home Additions</a></li>
+          <li><a href="#services">Outdoor Living</a></li>
+        </ul>
+      </div>
+      <div class="foot__col">
+        <h4>Service Areas</h4>
+        <ul>
+          <li>Main Line, PA</li>
+          <li>Villanova &amp; Radnor</li>
+          <li>Bryn Mawr &amp; Haverford</li>
+          <li>Gladwyne &amp; Wayne</li>
+          <li>Chestnut Hill</li>
+          <li>Greater Philadelphia</li>
+        </ul>
+      </div>
+      <div class="foot__col foot__cta">
+        <h4>Start a Project</h4>
+        <p>Ready to begin? Request a no-obligation estimate and consultation.</p>
+        <div class="foot__contact">
+          <a href="tel:+16105550199">(610) 555-0199</a>
+          <a href="mailto:studio@arthaus.co">studio@arthaus.co</a>
+          <span>120 Lancaster Ave, Wayne, PA 19087</span>
+        </div>
+        <a class="btn btn--light btn--block" href="mailto:studio@arthaus.co"><span>Request Estimate</span></a>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 ARTHAUS Residential. All rights reserved.</span>
+      <span class="links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Careers</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- header scroll state ---------- */
+const head=document.getElementById('head');
+const onScroll=()=>head.classList.toggle('is-scrolled',window.scrollY>40);
+onScroll();addEventListener('scroll',onScroll,{passive:true});
+
+/* ---------- mobile menu ---------- */
+const burger=document.getElementById('burger'),nav=document.getElementById('nav');
+burger.addEventListener('click',()=>{
+  const open=nav.classList.toggle('open');
+  burger.setAttribute('aria-expanded',open);
+  document.body.style.overflow=open?'hidden':'';
+});
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  nav.classList.remove('open');burger.setAttribute('aria-expanded',false);document.body.style.overflow='';
+}));
+
+/* ---------- scroll reveal ---------- */
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.16,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal,.step,.t-stagger').forEach(el=>io.observe(el));
+
+/* ---------- hero stat count-up ---------- */
+(function(){
+  const nums=document.querySelectorAll('.hero__meta .n[data-count]');
+  if(!nums.length)return;
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const easeOut=t=>1-Math.pow(1-t,3);
+  function run(el){
+    const target=parseFloat(el.dataset.count),
+          pre=el.dataset.prefix||'', suf=el.dataset.suffix||'',
+          dur=parseInt(el.dataset.dur||'1700',10);
+    if(reduce){el.innerHTML=pre+target+suf;return;}
+    let t0=null;
+    function step(ts){
+      if(t0===null)t0=ts;
+      const p=Math.min((ts-t0)/dur,1);
+      el.innerHTML=pre+Math.round(target*easeOut(p))+suf;
+      if(p<1)requestAnimationFrame(step);
+      else el.innerHTML=pre+target+suf;
+    }
+    requestAnimationFrame(step);
+  }
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){run(e.target);io.unobserve(e.target);}});
+  },{threshold:.6});
+  nums.forEach(n=>io.observe(n));
+})();
+
+/* ---------- scroll parallax + hero drift ---------- */
+(function(){
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const media=[...document.querySelectorAll('[data-px]')];
+  const heroInner=document.querySelector('.hero__inner');
+  let ticking=false;
+  function update(){
+    ticking=false;
+    const vh=innerHeight,y=scrollY;
+    if(heroInner&&y<vh){
+      heroInner.style.transform='translate3d(0,'+(y*0.22).toFixed(1)+'px,0)';
+      heroInner.style.opacity=Math.max(0,1-y/(vh*0.78)).toFixed(3);
+    }
+    for(const el of media){
+      const r=el.getBoundingClientRect();
+      if(r.bottom<-120||r.top>vh+120)continue;
+      const speed=parseFloat(el.dataset.px)||0.1;
+      const prog=(vh-r.top)/(vh+r.height);
+      const ty=(0.5-prog)*r.height*speed*2;
+      el.style.transform='translate3d(0,'+ty.toFixed(1)+'px,0) scale('+(1+speed*2).toFixed(3)+')';
+    }
+  }
+  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(update);}}
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',update);
+  update();
+})();
+
+/* ---------- before / after slider ---------- */
+(function(){
+  const ba=document.getElementById('ba');if(!ba)return;
+  const after=document.getElementById('baAfter'),handle=document.getElementById('baHandle');
+  let dragging=false;
+  const set=(clientX)=>{
+    const r=ba.getBoundingClientRect();
+    let p=((clientX-r.left)/r.width)*100;p=Math.max(2,Math.min(98,p));
+    after.style.clipPath='inset(0 0 0 '+p+'%)';handle.style.left=p+'%';
+  };
+  const start=()=>dragging=true, end=()=>dragging=false;
+  const move=(e)=>{if(!dragging)return;const x=e.touches?e.touches[0].clientX:e.clientX;set(x);};
+  ba.addEventListener('mousedown',e=>{start();set(e.clientX);});
+  ba.addEventListener('touchstart',e=>{start();set(e.touches[0].clientX);},{passive:true});
+  addEventListener('mousemove',move);addEventListener('touchmove',move,{passive:true});
+  addEventListener('mouseup',end);addEventListener('touchend',end);
+})();
+</script>
+</body>
+</html>
