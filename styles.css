@@ -602,21 +602,21 @@ body.menu-open .nav__actions { opacity: 0; pointer-events: none; }
     top: clamp(1.25rem, 2.5vw, 2.25rem);
     right: clamp(1.25rem, 2.5vw, 2.25rem);
     z-index: 3;
-    width: 48px;
-    height: 48px;
-    display: flex;
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     background: none;
-    border: none;
+    border: 1px solid var(--hairline);
+    border-radius: 50%;
     color: var(--bone);
-    font-size: 2.4rem;
+    font-size: 1.5rem;
     line-height: 1;
     cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+    transition: color 0.3s var(--ease), border-color 0.3s var(--ease), transform 0.3s var(--ease);
 }
-.menu__close:hover { opacity: 1; transform: rotate(90deg); }
+.menu__close:hover { color: var(--cta); border-color: var(--cta); transform: rotate(90deg); }
 
 .menu__nav { position: relative; z-index: 2; }
 
@@ -1623,3 +1623,116 @@ body.v6 .sect.is-open .brands img { filter: invert(1); }
 body.v6 .sect.is-open .brands a { opacity: 1; }            /* black */
 body.v6 .sect.is-open .brands a:hover,
 body.v6 .sect.is-open .brands a:focus-visible { opacity: 0.5; }   /* grey */
+
+/* ============================================================
+   VARIANT v7 (index7) — a single even row of 10 transparent logo
+   tiles along the bottom of the hero, with a fancy spotlight hover.
+   Replaces the dock entirely (own .brandstrip markup), so the v4/v6
+   dock rules don't apply. Scoped to body.v7.
+   ============================================================ */
+/* Keep the hero exactly one viewport tall so the bottom-anchored strip is
+   always inside the fold, on any screen height (dvh handles mobile UI bars). */
+body.v7 .hero {
+    height: 100vh;
+    height: 100dvh;
+    min-height: 0;
+}
+
+/* No slide-indicator dots on the hero. */
+body.v7 .hero__dots { display: none; }
+
+/* Menu open: hide the left burger and let clicks pass through the nav to the
+   menu's own × close (the nav sits above the menu and would otherwise swallow
+   the click on the × in the top strip). Single × close — like the Contact panel. */
+body.v7.menu-open .nav { pointer-events: none; }
+body.v7.menu-open .nav__menu { opacity: 0; pointer-events: none; }
+
+/* Drop the slogan back to the vertical centre of the hero. */
+body.v7 .hero__slogan {
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+body.v7 .brandstrip {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: clamp(80px, 11vh, 140px);
+    z-index: 10;
+    display: flex;
+    gap: clamp(8px, 0.8vw, 16px);
+    padding: 0 clamp(1.5rem, 6.15vw, 118px);
+}
+
+/* Equal transparent frosted tiles. */
+body.v7 .brandstrip__tile {
+    flex: 1 1 0;
+    min-width: 0;
+    height: clamp(88px, 9.5vh, 124px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 clamp(6px, 0.8vw, 14px);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.12);   /* less transparent */
+    border: 1px solid var(--hairline);
+    -webkit-backdrop-filter: blur(10px);     /* less blur */
+    backdrop-filter: blur(10px);
+    will-change: transform;
+    transition: transform 0.45s var(--ease), background 0.4s var(--ease),
+                border-color 0.4s var(--ease), box-shadow 0.45s var(--ease),
+                opacity 0.35s var(--ease);
+}
+body.v7 .brandstrip__tile img {
+    max-width: 100%;
+    height: clamp(39px, 3.6vw, 58px);   /* +15% */
+    width: auto;
+    opacity: 1;
+    filter: brightness(0) invert(1);   /* white logos */
+    transition: opacity 0.35s var(--ease), transform 0.45s var(--ease),
+                filter 0.35s var(--ease);
+}
+body.v7 .brandstrip__tile--wordmark img { height: clamp(20px, 1.8vw, 30px); }
+
+/* Spotlight: hovering the row dims only the OTHER tiles; the hovered one
+   stays fully lit (white logo). :not(:hover) keeps the dim off the active
+   tile AND outranks it, so the hovered logo never fades. */
+body.v7 .brandstrip:hover .brandstrip__tile:not(:hover):not(:focus-visible) {
+    opacity: 0.4;
+}
+
+/* The hovered tile lifts, frosts brighter, logo whitens, blue glow. */
+body.v7 .brandstrip__tile:hover,
+body.v7 .brandstrip__tile:focus-visible {
+    transform: translateY(-12px);
+    background: rgba(8, 12, 14, 0.6);     /* dark frosted fill (blur stays) */
+    border-color: transparent;            /* no outline on hover */
+    box-shadow: 0 10px 30px rgba(72, 138, 255, 0.32),
+                0 0 16px rgba(255, 255, 255, 0.1);
+}
+body.v7 .brandstrip__tile:hover img,
+body.v7 .brandstrip__tile:focus-visible img {
+    opacity: 1;
+    filter: brightness(0) invert(1);   /* pure white on hover */
+    transform: scale(1.06);
+}
+
+/* On page load: tiles rise in, staggered (staircase). backwards fill keeps
+   the start state during the delay and hands transform back afterwards so
+   the hover lift still works. */
+@keyframes v7-rise {
+    from { opacity: 0; transform: translateY(46px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+body.v7 .brandstrip__tile {
+    animation: v7-rise 0.7s var(--ease) backwards;
+}
+body.v7 .brandstrip__tile:nth-child(1) { animation-delay: 0.12s; }
+body.v7 .brandstrip__tile:nth-child(2) { animation-delay: 0.21s; }
+body.v7 .brandstrip__tile:nth-child(3) { animation-delay: 0.30s; }
+body.v7 .brandstrip__tile:nth-child(4) { animation-delay: 0.39s; }
+body.v7 .brandstrip__tile:nth-child(5) { animation-delay: 0.48s; }
+body.v7 .brandstrip__tile:nth-child(6) { animation-delay: 0.57s; }
+body.v7 .brandstrip__tile:nth-child(7) { animation-delay: 0.66s; }
+body.v7 .brandstrip__tile:nth-child(8) { animation-delay: 0.75s; }
+body.v7 .brandstrip__tile:nth-child(9) { animation-delay: 0.84s; }
