@@ -1575,3 +1575,51 @@ body.v4 .brands a:hover,
 body.v4 .brands a:focus-visible {
     opacity: 1;
 }
+
+/* ============================================================
+   VARIANT v6 (index6) — builds on v4. Differences:
+   - No "View All" button inside the boxes.
+   - Premium box stays open by default (resting state, set in script.js).
+   ============================================================ */
+body.v6 .sect__all { display: none; }
+/* Remove the CTA under the sliding hero slogan. */
+body.v6 .hero__slogan .hero__btn { display: none; }
+/* Slogan raised to open more space above the boxes. */
+body.v6 .hero__slogan { top: clamp(190px, 24vh, 330px); }
+/* Raise the whole boxes + tray block higher (was 16vh ≈ 160px from bottom). */
+body.v6 .dock { bottom: clamp(160px, 24vh, 280px); }
+
+/* Accent: bigger boxes + bigger logos (overrides the v4 size vars for index6;
+   later source order beats the equal-specificity body.v4 defaults). */
+body.v6 {
+    --v4-box-w: clamp(230px, 19vw, 290px);
+    --v4-box-h: 132px;
+    --v4-panel-h: 132px;
+}
+body.v6 .brands img { height: clamp(56px, 5.2vw, 82px); }
+/* Bentley wordmark scales with the rest */
+body.v6 .brands__bentley img:first-child { height: clamp(24px, 2.3vw, 36px); }
+body.v6 .brands__bentley img:last-child  { height: clamp(8px, 0.75vw, 13px); }
+
+/* Inverted open state: the active box + its dropdown flip to a light fill,
+   with dark label and dark logos (the rest of the boxes stay dark). */
+/* Smooth the glow/fill fade on hover. */
+body.v6 .sect {
+    transition: background 0.4s var(--ease), border-color 0.4s var(--ease),
+                box-shadow 0.45s var(--ease);
+}
+body.v6 .sect.is-open {
+    background: rgba(237, 234, 228, 0.58);   /* translucent — frosted via blur */
+    /* blue glow on hover — bluish halo + subtle white inner */
+    box-shadow: 0 0 66px 5px rgba(72, 138, 255, 0.66),
+                0 0 22px rgba(255, 255, 255, 0.2);
+}
+body.v6 .sect.is-open .sect__label { color: #0A0A0A; }
+body.v6 .sect.is-open .sect__content {
+    background: rgba(237, 234, 228, 0.58);
+}
+/* White logo SVGs → black on the light panel by default; grey on hover. */
+body.v6 .sect.is-open .brands img { filter: invert(1); }
+body.v6 .sect.is-open .brands a { opacity: 1; }            /* black */
+body.v6 .sect.is-open .brands a:hover,
+body.v6 .sect.is-open .brands a:focus-visible { opacity: 0.5; }   /* grey */

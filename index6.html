@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KERBECK</title>
+
+    <!-- Google Fonts: Roboto + Roboto Condensed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Roboto+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ink:  '#070A0B',
+                        panel:'#091012',
+                        bone: '#EDEAE4',
+                        red:  '#E10600'
+                    },
+                    fontFamily: {
+                        display: ['"Roboto Condensed"', 'sans-serif'],
+                        sans:    ['Roboto', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-dark v4 v6">
+
+    <main class="hero">
+
+        <!-- ============ BACKGROUND VIDEO ============ -->
+        <video class="hero__video" autoplay muted loop playsinline poster="images/hero-poster.jpg">
+            <source src="images/hero.mp4" type="video/mp4">
+        </video>
+        <div class="hero__scrim" aria-hidden="true"></div>
+
+        <!-- ============ NAV ============ -->
+        <header class="nav">
+            <div class="nav__blur" aria-hidden="true"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+            <button type="button" class="nav__menu" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+                <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span class="nav__menu-label">Menu</span>
+            </button>
+
+            <a class="nav__logo" href="/" aria-label="KERBECK — home">
+                <img src="images/logo-kerbeck.svg" alt="KERBECK">
+            </a>
+
+            <div class="nav__actions">
+                <a class="nav__icon" href="tel:+18567863030" aria-label="Call us">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                </a>
+                <a class="nav__icon" href="https://maps.google.com/?q=FC+Kerbeck+Palmyra+NJ" target="_blank" rel="noopener" aria-label="Location">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </a>
+                <a class="cta nav__contact" href="#contact"><span>Contact</span></a>
+            </div>
+        </header>
+
+        <!-- ============ SLOGAN (scroll-cycled slides) ============ -->
+        <div class="hero__slogan" id="slogan">
+            <div class="hero__slide is-active">
+                <div class="hero__slogan-title">
+                    <span>Over A Century of</span>
+                    <span>Exceptional Automobiles</span>
+                </div>
+                <p class="hero__slogan-sub">From luxury icons to everyday excellence.</p>
+                <a class="cta hero__btn" href="#"><span>Browse Inventory</span></a>
+            </div>
+
+            <div class="hero__slide">
+                <div class="hero__slogan-title">
+                    <span>Drive Home</span>
+                    <span>With Confidence</span>
+                </div>
+                <p class="hero__slogan-sub">Simple, flexible financing.</p>
+                <a class="cta hero__btn" href="#"><span>Get Pre-Approved</span></a>
+            </div>
+
+            <div class="hero__slide">
+                <div class="hero__slogan-title">
+                    <span>Expert Care For</span>
+                    <span>Every Mile Ahead</span>
+                </div>
+                <p class="hero__slogan-sub">Service you can trust.</p>
+                <a class="cta hero__btn" href="#"><span>Schedule Service</span></a>
+            </div>
+        </div>
+
+        <!-- Slide indicator dots -->
+        <div class="hero__dots" id="slogan-dots" role="tablist" aria-label="Highlights">
+            <button type="button" class="hero__dot is-active" aria-label="Slide 1"></button>
+            <button type="button" class="hero__dot" aria-label="Slide 2"></button>
+            <button type="button" class="hero__dot" aria-label="Slide 3"></button>
+        </div>
+
+        <!-- ============ BOTTOM DOCK — collapsible hover sections ============ -->
+        <section class="dock" aria-label="Our brands">
+
+            <!-- Premium brands -->
+            <div class="sect is-open" data-sect="premium">
+                <span class="sect__label">Our Premium Brands</span>
+                <a class="cta sect__all" href="https://www.kerbeckcars.com/" target="_blank" rel="noopener"><span>View All</span></a>
+                <div class="sect__content">
+                    <ul class="brands">
+                        <li>
+                            <a href="https://www.fckerbecklamborghini.com/" target="_blank" rel="noopener" aria-label="Lamborghini">
+                                <img src="images/lambo_logo.svg" alt="Lamborghini">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.fckerbeckrollsroyce.com/" target="_blank" rel="noopener" aria-label="Rolls-Royce">
+                                <img src="images/rr_logo.svg" alt="Rolls-Royce">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.astonmartinphiladelphia.com/" target="_blank" rel="noopener" aria-label="Aston Martin">
+                                <img src="images/aston_logo.svg" alt="Aston Martin">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.fckerbeckmaserati.com/" target="_blank" rel="noopener" aria-label="Maserati">
+                                <img src="images/maserati_logo.svg" alt="Maserati">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.bentleypalmyra.com/" target="_blank" rel="noopener" aria-label="Bentley">
+                                <img src="images/bentley_logo.svg" alt="Bentley">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Buick GMC -->
+            <div class="sect" data-sect="gmc">
+                <span class="sect__label">Buick GMC</span>
+                <a class="cta sect__all" href="https://www.fckerbeckbuickgmc.com/" target="_blank" rel="noopener"><span>View All</span></a>
+                <div class="sect__content">
+                    <ul class="brands">
+                        <li>
+                            <a href="https://www.fckerbeckbuickgmc.com/" target="_blank" rel="noopener" aria-label="Buick">
+                                <img src="images/buick_logo.svg" alt="Buick">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.fckerbeckbuickgmc.com/" target="_blank" rel="noopener" aria-label="GMC">
+                                <img src="images/gmc_logo.svg" alt="GMC">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.fckerbeckbuickgmc.com/" target="_blank" rel="noopener" aria-label="Hummer">
+                                <img src="images/hummer_logo.svg" alt="Hummer">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Preowned Cadillac -->
+            <div class="sect" data-sect="cadillac">
+                <span class="sect__label">Pre-Owned Cadillac</span>
+                <a class="cta sect__all" href="https://www.fckerbeckcadillacs.com/" target="_blank" rel="noopener"><span>View All</span></a>
+                <div class="sect__content">
+                    <ul class="brands">
+                        <li>
+                            <a href="https://www.fckerbeckcadillacs.com/" target="_blank" rel="noopener" aria-label="Cadillac">
+                                <img src="images/cadillac_logo.svg" alt="Cadillac">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ============ INVENTORY (full-width carousel) ============ -->
+    <section class="inventory" id="inventory" aria-label="Featured inventory">
+        <header class="inventory__head">
+            <div class="inventory__heading">
+                <span class="inventory__eyebrow">The Collection</span>
+                <h1 class="inventory__title">Featured Inventory</h1>
+            </div>
+        </header>
+
+        <!-- Cards rendered by script.js from the INVENTORY data (repeated for now) -->
+        <div class="inv-track" id="inv-track"></div>
+
+        <div class="inventory__more">
+            <a class="cta hero__btn" href="#"><span>View All Inventory</span></a>
+        </div>
+    </section>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+        <div class="footer__grid">
+            <div class="footer__col footer__brand">
+                <span class="footer__eyebrow">Get in touch</span>
+                <h2 class="footer__heading">Visit Our Showroom</h2>
+                <a class="footer__logo" href="/" aria-label="KERBECK — home">
+                    <img src="images/logo-kerbeck.svg" alt="KERBECK">
+                </a>
+                <p class="footer__since">FC Kerbeck · Prestige Imports.<br>Luxury &amp; exotic automobiles since 1899.</p>
+            </div>
+
+            <div class="footer__col">
+                <span class="footer__label">Sales Hours</span>
+                <ul class="footer__hours">
+                    <li><span>Mon – Fri</span><span>9:00 AM – 8:00 PM</span></li>
+                    <li><span>Saturday</span><span>9:00 AM – 6:00 PM</span></li>
+                    <li><span>Sunday</span><span>Closed</span></li>
+                </ul>
+            </div>
+
+            <div class="footer__col">
+                <span class="footer__label">Service Hours</span>
+                <ul class="footer__hours">
+                    <li><span>Mon – Fri</span><span>7:30 AM – 7:00 PM</span></li>
+                    <li><span>Saturday</span><span>8:00 AM – 1:00 PM</span></li>
+                    <li><span>Sunday</span><span>Closed</span></li>
+                </ul>
+            </div>
+
+            <div class="footer__col">
+                <span class="footer__label">Visit Us</span>
+                <address class="footer__addr">
+                    100 Route 73 North<br>
+                    Palmyra, NJ 08065<br>
+                    <a href="tel:+18568298200">856-829-8200</a>
+                </address>
+                <div class="footer__social">
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3l.4-3H14V4.5c0-.9.3-1.5 1.6-1.5H17V.3C16.7.2 15.8 0 14.7 0 12.3 0 11 1.4 11 3.9V6H8v3h3v9h3z"/></svg>
+                    </a>
+                    <a href="#" aria-label="YouTube">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 8.5l5.5 3.5L10 15.5z" fill="currentColor" stroke="none"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buy With Confidence (pre-owned disclosure) -->
+        <div class="footer__confidence">
+            <span class="footer__label">Buy With Confidence</span>
+            <p>We disclose every pre-owned vehicle with a minimum of $1000 prior repairs, when most dealers fail to disclose any/all repairs. Our goal is to provide you with the details of the vehicle's history so you can buy with confidence here at Kerbeck.</p>
+        </div>
+
+        <!-- Fine-print disclaimer (centered) -->
+        <div class="footer__legal">
+            <p>*Price(s) include(s) all costs to be paid by a consumer, except for licensing cost, registration fees, and taxes.</p>
+            <p>Currently, FC Kerbeck does not sell or lease cars in the states of MT, OR, NH or AK, sorry for any inconvenience. FC Kerbeck makes every effort to provide full and accurate information. However, because errors may occur, please contact us to verify options, prices and rebate/incentive information before purchasing. All vehicles are subject to prior sale. All new vehicle prices include the destination charge (freight cost). All prices exclude state taxes and fees, motor vehicle registration charges, and processing fees. All taxes and fees will be paid to the legally appropriate states. Prices may not be combined with any other past, present, or future offers or advertised promotions or specials. Prior sales, inbound and ordered vehicles excluded from current price offers. Sale to ultimate retail consumer only, one vehicle per customer. No sale or lease to auto dealers, dealer's agents, management, sales staff or employees of dealers, leasing companies, brokers, exporters, etc. No sale to any person or company appearing on any export list or which has the same address as any person or company appearing on any export list. To that same end, FC Kerbeck reserves the right, at any point during a transaction, to prevent sale to any person or company that may not be a permanent resident of the US, may live or work outside of the US.</p>
+        </div>
+
+        <div class="footer__bottom">
+            <span>© 2026 FC Kerbeck · Prestige Imports. All rights reserved.</span>
+            <span class="footer__links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Sitemap</a></span>
+        </div>
+
+        <p class="footer__powered">Powered by All Auto Network</p>
+    </footer>
+
+    <!-- ============ FULLSCREEN MENU OVERLAY ============ -->
+    <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Main menu" aria-hidden="true">
+        <div class="menu__panel">
+            <!-- Background image (changes on hover) -->
+            <div class="menu__bg" id="menu-bg-1"></div>
+            <div class="menu__bg" id="menu-bg-2"></div>
+
+            <nav class="menu__nav" aria-label="Primary">
+                <ul class="menu__list">
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_Home.jpg"><span class="menu__text"><span class="menu__text-a">Home</span><span class="menu__text-b" aria-hidden="true">Home</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_newinventory.png" data-sub="new-inventory"><span class="menu__text"><span class="menu__text-a">New Inventory</span><span class="menu__text-b" aria-hidden="true">New Inventory</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_preowned.jpg" data-sub="pre-owned"><span class="menu__text"><span class="menu__text-a">Pre-Owned</span><span class="menu__text-b" aria-hidden="true">Pre-Owned</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_finance.jpg"><span class="menu__text"><span class="menu__text-a">Finance</span><span class="menu__text-b" aria-hidden="true">Finance</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_getpequalified.jpg"><span class="menu__text"><span class="menu__text-a">Get Pre-qualified</span><span class="menu__text-b" aria-hidden="true">Get Pre-qualified</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_service.jpg"><span class="menu__text"><span class="menu__text-a">Service &amp; Parts</span><span class="menu__text-b" aria-hidden="true">Service &amp; Parts</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#" data-img="images/menu/nav_about.jpg"><span class="menu__text"><span class="menu__text-a">About</span><span class="menu__text-b" aria-hidden="true">About</span></span></a></li>
+                    <li class="menu__item"><a class="menu__link" href="#contact" data-img="images/menu/nav_contact.jpg"><span class="menu__text"><span class="menu__text-a">Contact</span><span class="menu__text-b" aria-hidden="true">Contact</span></span></a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Second level (flyout) -->
+        <div class="menu__sub" id="sub-new-inventory" data-for="new-inventory">
+            <div class="menu__sub-group">
+                <span class="menu__sub-label">Premium Models</span>
+                <ul class="menu__sub-list">
+                    <li><a href="https://www.fckerbeckrollsroyce.com/" target="_blank" rel="noopener">Rolls-Royce</a></li>
+                    <li><a href="https://www.bentleypalmyra.com/" target="_blank" rel="noopener">Bentley</a></li>
+                    <li><a href="https://www.astonmartinphiladelphia.com/" target="_blank" rel="noopener">Aston Martin</a></li>
+                    <li><a href="https://www.fckerbeckmaserati.com/" target="_blank" rel="noopener">Maserati</a></li>
+                    <li><a href="https://www.fckerbecklamborghini.com/" target="_blank" rel="noopener">Lamborghini</a></li>
+                </ul>
+            </div>
+            <div class="menu__sub-group">
+                <span class="menu__sub-label">New Inventory</span>
+                <ul class="menu__sub-list">
+                    <li><a href="#">Aston Martin <span class="menu__sub-count">4</span></a></li>
+                    <li><a href="#">Bentley <span class="menu__sub-count">45</span></a></li>
+                    <li><a href="#">Buick <span class="menu__sub-count">66</span></a></li>
+                    <li><a href="#">GMC <span class="menu__sub-count">75</span></a></li>
+                    <li><a href="#">Lamborghini <span class="menu__sub-count">1</span></a></li>
+                    <li><a href="#">Maserati <span class="menu__sub-count">9</span></a></li>
+                    <li><a href="#">Rolls-Royce <span class="menu__sub-count">2</span></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="menu__sub" id="sub-pre-owned" data-for="pre-owned">
+            <div class="menu__sub-group">
+                <span class="menu__sub-label">Pre-Owned</span>
+                <ul class="menu__sub-list menu__sub-list--cols">
+                    <li><a href="#">BMW <span class="menu__sub-count">1</span></a></li>
+                    <li><a href="#">Buick <span class="menu__sub-count">27</span></a></li>
+                    <li><a href="#">Cadillac <span class="menu__sub-count">90</span></a></li>
+                    <li><a href="#">Chevrolet <span class="menu__sub-count">25</span></a></li>
+                    <li><a href="#">Ferrari <span class="menu__sub-count">1</span></a></li>
+                    <li><a href="#">Ford <span class="menu__sub-count">2</span></a></li>
+                    <li><a href="#">GMC <span class="menu__sub-count">31</span></a></li>
+                    <li><a href="#">Jeep <span class="menu__sub-count">2</span></a></li>
+                    <li><a href="#">Land Rover <span class="menu__sub-count">5</span></a></li>
+                    <li><a href="#">Lexus <span class="menu__sub-count">1</span></a></li>
+                    <li><a href="#">Mercedes-Benz <span class="menu__sub-count">5</span></a></li>
+                    <li><a href="#">Nissan <span class="menu__sub-count">1</span></a></li>
+                    <li><a href="#">Porsche <span class="menu__sub-count">4</span></a></li>
+                    <li><a href="#">Ram <span class="menu__sub-count">1</span></a></li>
+                    <li><a href="#">Tesla <span class="menu__sub-count">1</span></a></li>
+                    <li><a href="#">Toyota <span class="menu__sub-count">1</span></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ CONTACT SLIDE-IN PANEL ============ -->
+    <div class="contact-panel" id="contact-panel" role="dialog" aria-modal="true" aria-label="Contact us" aria-hidden="true">
+        <div class="contact-panel__inner">
+            <button type="button" class="contact-panel__close" aria-label="Close">&times;</button>
+            <span class="contact-panel__eyebrow">Get in touch</span>
+            <h2 class="contact-panel__title">Contact Us</h2>
+            <p class="contact-panel__sub">Questions about a vehicle, financing or service? Send us a message and we&rsquo;ll get right back to you.</p>
+            <form class="contact-panel__form" novalidate>
+                <input type="text" name="name" placeholder="Name" aria-label="Name">
+                <input type="email" name="email" placeholder="Email" aria-label="Email">
+                <input type="tel" name="phone" placeholder="Phone" aria-label="Phone">
+                <textarea name="message" rows="4" placeholder="Message" aria-label="Message"></textarea>
+                <button type="submit" class="cta hero__btn contact-panel__send"><span>Send Message</span></button>
+            </form>
+            <div class="contact-panel__meta">
+                100 Route 73 North, Palmyra, NJ 08065<br>
+                <a href="tel:+18568298200">856-829-8200</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

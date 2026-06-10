@@ -76,6 +76,13 @@
     const closeAll = () =>
         sections.forEach((s) => s.classList.remove('is-open'));
 
+    // index6 (body.v6): Premium stays open as the resting state — on load and
+    // whenever the pointer/focus leaves the dock — instead of closing fully.
+    const defaultSect = document.body.classList.contains('v6')
+        ? sections.find((s) => s.dataset.sect === 'premium')
+        : null;
+    const reset = () => (defaultSect ? openOnly(defaultSect) : closeAll());
+
     let hoverTimer = null;
     const OPEN_DELAY = 180;   // ms — slight hover-intent delay before opening
 
@@ -88,16 +95,18 @@
         s.addEventListener('focusin', () => { clearTimeout(hoverTimer); openOnly(s); });
     });
 
-    // Close when the pointer leaves the whole dock (unless focus is still inside)
+    // Leave the whole dock → back to the resting state (close, or Premium for v6)
     dock.addEventListener('mouseleave', () => {
         clearTimeout(hoverTimer);
-        if (!dock.contains(document.activeElement)) closeAll();
+        if (!dock.contains(document.activeElement)) reset();
     });
 
-    // Close when keyboard focus leaves the dock entirely
+    // Keyboard focus leaves the dock entirely → resting state
     dock.addEventListener('focusout', (e) => {
-        if (!dock.contains(e.relatedTarget)) closeAll();
+        if (!dock.contains(e.relatedTarget)) reset();
     });
+
+    reset();   // apply resting state on load
 })();
 
 
